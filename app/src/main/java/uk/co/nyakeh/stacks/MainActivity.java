@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mNameTextView = (TextView) findViewById(R.id.content0);
-        mSymbolTextView = (TextView) findViewById(R.id.content1);
-        mStockExchangeTextView = (TextView) findViewById(R.id.content2);
-        mChangeTextView = (TextView) findViewById(R.id.content3);
-        mChangeinPercentTextView = (TextView) findViewById(R.id.content4);
-        mOpenTextView = (TextView) findViewById(R.id.content5);
+        mNameTextView = (TextView) findViewById(R.id.stockName);
+        mSymbolTextView = (TextView) findViewById(R.id.stockSymbol);
+        mStockExchangeTextView = (TextView) findViewById(R.id.stockExchange);
+        mChangeTextView = (TextView) findViewById(R.id.stockChange);
+        mChangeinPercentTextView = (TextView) findViewById(R.id.stockChangeInPercent);
+        mOpenTextView = (TextView) findViewById(R.id.stockOpen);
     }
 
     String run(String url) throws IOException {

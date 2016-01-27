@@ -14,38 +14,56 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
-        android:id="@+id/content0"
-        android:layout_width="wrap_content"
+        android:id="@+id/stockName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:gravity="center"
+        android:text="Vanguard FTSE 250 ETF"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
     <TextView
-        android:id="@+id/content1"
-        android:layout_width="wrap_content"
+        android:id="@+id/stockSymbol"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/content0"
-        android:text="one"/>
+        android:layout_below="@+id/stockName"
+        android:gravity="center"
+        android:text="VMID.L"
+        android:textSize="20dp"/>
+
     <TextView
-        android:id="@+id/content2"
-        android:layout_width="wrap_content"
+        android:id="@+id/stockExchange"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/content1"
-        android:text="two"/>
+        android:layout_below="@+id/stockSymbol"
+        android:gravity="center"
+        android:text="LSE"
+        android:textSize="20dp"/>
+
     <TextView
-        android:id="@+id/content3"
-        android:layout_width="wrap_content"
+        android:id="@+id/stockChange"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/content2"
-        android:text="three"/>
+        android:layout_below="@+id/stockExchange"
+        android:gravity="center"
+        android:textSize="20dp"
+        tools:text="+7.00"/>
+
     <TextView
-        android:id="@+id/content4"
-        android:layout_width="wrap_content"
+        android:id="@+id/stockChangeInPercent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/content3"
-        android:text="four"/>
+        android:layout_below="@+id/stockChange"
+        android:gravity="center"
+        android:textSize="20dp"
+        tools:text="+0.27%"/>
+
     <TextView
-        android:id="@+id/content5"
-        android:layout_width="wrap_content"
+        android:id="@+id/stockOpen"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/content4"
-        android:text="five"/>
+        android:layout_below="@+id/stockChangeInPercent"
+        android:gravity="center"
+        android:textSize="20dp"
+        tools:text="25.87"/>
 </RelativeLayout>
