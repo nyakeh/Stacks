@@ -66,12 +66,7 @@ public class MainActivity extends AppCompatActivity
                             Log.d("MainActivity", "response = " + new Gson().toJson(response.body()));
                             YahooOverviewResponse result = response.body();
                             mYahooOverviewQuote = result.query.results.quote;
-                            mNameTextView.setText(mYahooOverviewQuote.Name);
-                            mSymbolTextView.setText(mYahooOverviewQuote.Symbol);
-                            mStockExchangeTextView.setText(mYahooOverviewQuote.StockExchange);
-                            mChangeTextView.setText(mYahooOverviewQuote.Change);
-                            mChangeinPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
-                            mOpenTextView.setText(mYahooOverviewQuote.Open);
+                            updateUI();
                         } else {
                             Log.d("error", response.toString());
                         }
@@ -84,6 +79,15 @@ public class MainActivity extends AppCompatActivity
                 });
             }
         });
+    }
+
+    private void updateUI() {
+        mNameTextView.setText(mYahooOverviewQuote.Name);
+        mSymbolTextView.setText(mYahooOverviewQuote.Symbol);
+        mStockExchangeTextView.setText(mYahooOverviewQuote.StockExchange);
+        mChangeTextView.setText(mYahooOverviewQuote.Change);
+        mChangeinPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
+        mOpenTextView.setText(mYahooOverviewQuote.Open);
     }
 
     @Override
