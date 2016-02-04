@@ -4,38 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import com.google.gson.Gson;
 
-import java.io.IOException;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private final OkHttpClient client = new OkHttpClient();
-    String mApiCallResult = "";
-    String name = "";
-    String symbol = "";
-    String stockExchange = "";
-    String change = "";
-    String changeinPercent = "";
-    String open = "";
+    private YahooOverviewQuote mYahooOverviewQuote;
     TextView mNameTextView;
     TextView mSymbolTextView;
     TextView mStockExchangeTextView;
@@ -49,27 +35,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    String response = run("http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20yahoo.finance.quotes%20where%20symbol%20in%20%28%22VMID.L%22%29%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json");
-
-                    mNameTextView.setText(name);
-                    mSymbolTextView.setText(symbol);
-                    mStockExchangeTextView.setText(stockExchange);
-                    mChangeTextView.setText(change);
-                    mChangeinPercentTextView.setText(changeinPercent);
-                    mOpenTextView.setText(open);
-                    Snackbar.make(view, response, Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,54 +50,40 @@ public class MainActivity extends AppCompatActivity
         mChangeTextView = (TextView) findViewById(R.id.stockChange);
         mChangeinPercentTextView = (TextView) findViewById(R.id.stockChangeInPercent);
         mOpenTextView = (TextView) findViewById(R.id.stockOpen);
-    }
 
-    String run(String url) throws IOException {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(Request request, IOException e) {
-                e.printStackTrace();
-                mApiCallResult = e.getMessage();
-            }
+            public void onClick(View view) {
+                Log.d("MainActivity", "Click ");
+                RestClient.FinanceApiInterface service = RestClient.getClient();
+                Call<YahooOverviewResponse> call = service.getStockOverview();
+                call.enqueue(new retrofit2.Callback<YahooOverviewResponse>() {
+                    @Override
+                    public void onResponse(retrofit2.Response<YahooOverviewResponse> response) {
+                        Log.d("MainActivity", "Status Code = " + response.code());
+                        if (response.isSuccess()) {
+                            Log.d("MainActivity", "response = " + new Gson().toJson(response.body()));
+                            YahooOverviewResponse result = response.body();
+                            mYahooOverviewQuote = result.query.results.quote;
+                            mNameTextView.setText(mYahooOverviewQuote.Name);
+                            mSymbolTextView.setText(mYahooOverviewQuote.Symbol);
+                            mStockExchangeTextView.setText(mYahooOverviewQuote.StockExchange);
+                            mChangeTextView.setText(mYahooOverviewQuote.Change);
+                            mChangeinPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
+                            mOpenTextView.setText(mYahooOverviewQuote.Open);
+                        } else {
+                            Log.d("error", response.toString());
+                        }
+                    }
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    throw new IOException("Unexpected code " + response);
-                }
-
-                Headers responseHeaders = response.headers();
-                for (int i = 0; i < responseHeaders.size(); i++) {
-                    System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-                }
-
-                String responseBody = response.body().string();
-                System.out.println(responseBody);
-                mApiCallResult = responseBody;
-                try {
-                    JSONObject responseJson = (JSONObject) new JSONTokener(responseBody).nextValue();
-                    JSONObject queryJson = responseJson.getJSONObject("query");
-                    JSONObject resultsJson = queryJson.getJSONObject("results");
-                    JSONObject quoteJson = resultsJson.getJSONObject("quote");
-                    name = quoteJson.getString("Name");
-                    symbol = quoteJson.getString("Symbol");
-                    stockExchange = quoteJson.getString("StockExchange");
-                    change = quoteJson.getString("Change");
-                    changeinPercent = quoteJson.getString("ChangeinPercent");
-                    open = quoteJson.getString("Open");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                //mApiCallResult = response.body().string();
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.d("StockActivity", "Status Code = " + t.getMessage());
+                    }
+                });
             }
         });
-        return mApiCallResult;
     }
 
     @Override

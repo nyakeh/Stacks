@@ -25,17 +25,15 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StockActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private final OkHttpClient mOkHttpClient = new OkHttpClient();
     private RecyclerView mStockRecyclerView;
     private StockAdapter mStockAdapter;
-    private YahooStockQuery mYahooStockQuery = new YahooStockQuery();
+    private YahooStockQuery mYahooStockQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +82,7 @@ public class StockActivity extends AppCompatActivity
 
             @Override
             public void onFailure(Throwable t) {
-
+                Log.d("StockActivity", "Status Code = " + t.getMessage());
             }
         });
         mStockAdapter = new StockAdapter(new ArrayList<YahooStockQuote>());

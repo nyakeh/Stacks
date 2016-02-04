@@ -51,5 +51,9 @@ public class RestClient {
         @Headers({"Content-Type: application/json"})
         @GET("yql?env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json&q=select%20*%20from%20yahoo.finance.historicaldata%20where%20startDate=%272016-01-01%27%20and%20endDate=%272017-01-10%27%20and%20symbol=%27vmid.l%27")
         Call<YahooStockResponse> getStockHistory();
+
+        @Headers({"Content-Type: application/json"})
+        @GET("yql?q=select%20%2a%20from%20yahoo.finance.quotes%20where%20symbol%20in%20%28%22VMID.L%22%29%0A%09%09&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json")
+        Call<YahooOverviewResponse> getStockOverview();
     }
 }
