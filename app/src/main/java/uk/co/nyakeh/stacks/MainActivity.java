@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private YahooOverviewQuote mYahooOverviewQuote;
     TextView mNameTextView;
+    TextView mStockPriceChangeTextView;
     TextView mSymbolTextView;
-    TextView mStockExchangeTextView;
     TextView mChangeTextView;
-    TextView mChangeinPercentTextView;
+    TextView mChangeInPercentTextView;
     TextView mOpenTextView;
 
     @Override
@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mNameTextView = (TextView) findViewById(R.id.stockName);
+        mStockPriceChangeTextView = (TextView) findViewById(R.id.stockPriceChange);
         mSymbolTextView = (TextView) findViewById(R.id.stockSymbol);
-        mStockExchangeTextView = (TextView) findViewById(R.id.stockExchange);
         mChangeTextView = (TextView) findViewById(R.id.stockChange);
-        mChangeinPercentTextView = (TextView) findViewById(R.id.stockChangeInPercent);
+        mChangeInPercentTextView = (TextView) findViewById(R.id.stockChangeInPercent);
         mOpenTextView = (TextView) findViewById(R.id.stockOpen);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -88,10 +88,16 @@ public class MainActivity extends AppCompatActivity
     private void updateUI() {
         mNameTextView.setText(mYahooOverviewQuote.Name);
         mSymbolTextView.setText(mYahooOverviewQuote.Symbol);
-        mStockExchangeTextView.setText(mYahooOverviewQuote.StockExchange);
         mChangeTextView.setText(mYahooOverviewQuote.Change);
-        mChangeinPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
+        mChangeInPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
         mOpenTextView.setText(mYahooOverviewQuote.Open);
+
+        if (mYahooOverviewQuote.Open != null && !mYahooOverviewQuote.Open.isEmpty()) {
+            Double myStockPurchaseValue = 35 * 28.126;
+            Double currentStockValue = 35 * Double.valueOf(mYahooOverviewQuote.Open);
+            double stockPriceChange = currentStockValue - myStockPurchaseValue;
+            mStockPriceChangeTextView.setText(String.valueOf(stockPriceChange));
+        }
     }
 
     @Override
