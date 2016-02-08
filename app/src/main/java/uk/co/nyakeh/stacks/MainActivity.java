@@ -55,26 +55,32 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RestClient.FinanceApiInterface service = RestClient.getClient();
-                Call<YahooOverviewResponse> call = service.getStockOverview();
-                call.enqueue(new retrofit2.Callback<YahooOverviewResponse>() {
-                    @Override
-                    public void onResponse(retrofit2.Response<YahooOverviewResponse> response) {
-                        if (response.isSuccess()) {
-                            Log.d("MainActivity", "response = " + new Gson().toJson(response.body()));
-                            YahooOverviewResponse result = response.body();
-                            mYahooOverviewQuote = result.query.results.quote;
-                            updateUI();
-                        } else {
-                            Log.d("Api Error", response.toString());
-                        }
-                    }
+                getLatestStockData();
+            }
+        });
 
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Log.d("MainActivity", "Status Code = " + t.getMessage());
-                    }
-                });
+        getLatestStockData();
+    }
+
+    private void getLatestStockData() {
+        RestClient.FinanceApiInterface service = RestClient.getClient();
+        Call<YahooOverviewResponse> call = service.getStockOverview();
+        call.enqueue(new retrofit2.Callback<YahooOverviewResponse>() {
+            @Override
+            public void onResponse(retrofit2.Response<YahooOverviewResponse> response) {
+                if (response.isSuccess()) {
+                    Log.d("MainActivity", "response = " + new Gson().toJson(response.body()));
+                    YahooOverviewResponse result = response.body();
+                    mYahooOverviewQuote = result.query.results.quote;
+                    updateUI();
+                } else {
+                    Log.d("Api Error", response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("MainActivity", "Status Code = " + t.getMessage());
             }
         });
     }

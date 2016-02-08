@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,15 +45,15 @@ public class StockActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                getLatestStockData();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
 
             }
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stock_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -64,6 +63,10 @@ public class StockActivity extends AppCompatActivity
         mStockRecyclerView = (RecyclerView) findViewById(R.id.stock_recycler_view);
         mStockRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        getLatestStockData();
+    }
+
+    private void getLatestStockData() {
         RestClient.FinanceApiInterface service = RestClient.getClient();
         Call<YahooStockResponse> call = service.getStockHistory();
         call.enqueue(new Callback<YahooStockResponse>() {
@@ -76,7 +79,7 @@ public class StockActivity extends AppCompatActivity
                     mYahooStockQuery = result.query;
                     updateUI();
                 } else {
-                    Log.d("error" , response.toString());
+                    Log.d("error", response.toString());
                 }
             }
 
@@ -85,9 +88,7 @@ public class StockActivity extends AppCompatActivity
                 Log.d("StockActivity", "Status Code = " + t.getMessage());
             }
         });
-        mStockAdapter = new StockAdapter(new ArrayList<YahooStockQuote>());
-        mStockRecyclerView.setAdapter(mStockAdapter);
-  }
+    }
 
     private void updateUI() {
         if (mStockAdapter == null) {
