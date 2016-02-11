@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView mChangeTextView;
     TextView mChangeInPercentTextView;
     TextView mOpenTextView;
+    TextView mStockValuation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mChangeTextView = (TextView) findViewById(R.id.stockChange);
         mChangeInPercentTextView = (TextView) findViewById(R.id.stockChangeInPercent);
         mOpenTextView = (TextView) findViewById(R.id.stockOpen);
+        mStockValuation = (TextView) findViewById(R.id.stockValuation);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSymbolTextView.setText(mYahooOverviewQuote.Symbol);
         mChangeTextView.setText(mYahooOverviewQuote.Change);
         mChangeInPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
-        mOpenTextView.setText(mYahooOverviewQuote.Open);
 
         String cachedStockOpen = mSharedPreferences.getString(STOCK_PRICE_KEY, "");
         if (mYahooOverviewQuote.Open == null && mYahooOverviewQuote.Open.isEmpty() && (!cachedStockOpen.isEmpty())) {
@@ -108,7 +109,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         double myStockPurchaseValue = 35 * 28.126;
         double currentStockValue = 35 * Double.valueOf(mYahooOverviewQuote.Open);
         double stockPriceChange = currentStockValue - myStockPurchaseValue;
-        mStockPriceChangeTextView.setText(String.format("$%.2f", stockPriceChange));
+
+        mOpenTextView.setText("£" + mYahooOverviewQuote.Open);
+        mStockPriceChangeTextView.setText(String.format("%.2f GBP", stockPriceChange));
+        mStockValuation.setText(String.format("£%.2f", currentStockValue));
     }
 
     @Override
