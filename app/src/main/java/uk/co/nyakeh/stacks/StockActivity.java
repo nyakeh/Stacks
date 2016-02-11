@@ -1,6 +1,8 @@
 package uk.co.nyakeh.stacks;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -28,11 +30,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class StockActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class StockActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String STOCK_PRICE_KEY = "VMID.L|PRICE";
     private RecyclerView mStockRecyclerView;
     private StockAdapter mStockAdapter;
     private YahooStockQuery mYahooStockQuery;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class StockActivity extends AppCompatActivity
         setContentView(R.layout.activity_stock);
         Toolbar toolbar = (Toolbar) findViewById(R.id.stock_toolbar);
         setSupportActionBar(toolbar);
+
+        mSharedPreferences = this.getSharedPreferences("uk.co.nyakeh.stacks", Context.MODE_PRIVATE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +82,11 @@ public class StockActivity extends AppCompatActivity
                     Log.d("StockActivity", "response = " + new Gson().toJson(response.body()));
                     YahooStockResponse result = response.body();
                     mYahooStockQuery = result.query;
+
+                    if(!mYahooStockQuery.results.quote.isEmpty()) {
+                        YahooStockQuote latestQuote = mYahooStockQuery.results.quote.get(0);
+                        mSharedPreferences.edit().putString(STOCK_PRICE_KEY, latestQuote.Close).apply();
+                    }
                     updateUI();
                 } else {
                     Log.d("error", response.toString());
@@ -186,8 +196,6 @@ public class StockActivity extends AppCompatActivity
         @Override
         public void onBindViewHolder(StockHolder stockHolder, int position) {
             YahooStockQuote quote = mYahooQuotes.get(position);
-            System.out.println(position);
-            System.out.println(quote.Date);
             stockHolder.bindQuote(quote);
         }
 

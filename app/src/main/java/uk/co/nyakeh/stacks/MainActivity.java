@@ -21,9 +21,8 @@ import com.google.gson.Gson;
 
 import retrofit2.Call;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    public static final String STOCK_OPEN_KEY = "VMID.L|OPEN";
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String STOCK_PRICE_KEY = "VMID.L|PRICE";
     private YahooOverviewQuote mYahooOverviewQuote;
     private SharedPreferences mSharedPreferences;
     TextView mNameTextView;
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity
                     YahooOverviewResponse result = response.body();
                     mYahooOverviewQuote = result.query.results.quote;
                     if (mYahooOverviewQuote.Open != null && !mYahooOverviewQuote.Open.isEmpty()) {
-                        mSharedPreferences.edit().putString(STOCK_OPEN_KEY, mYahooOverviewQuote.Open).apply();
+                        mSharedPreferences.edit().putString(STOCK_PRICE_KEY, mYahooOverviewQuote.Open).apply();
                     }
                     updateUI();
                 } else {
@@ -101,8 +100,7 @@ public class MainActivity extends AppCompatActivity
         mChangeInPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
         mOpenTextView.setText(mYahooOverviewQuote.Open);
 
-        String cachedStockOpen = mSharedPreferences.getString(STOCK_OPEN_KEY, "");
-        Log.d("cachedStockOpen: ", cachedStockOpen);
+        String cachedStockOpen = mSharedPreferences.getString(STOCK_PRICE_KEY, "");
         if (mYahooOverviewQuote.Open == null && mYahooOverviewQuote.Open.isEmpty() && (!cachedStockOpen.isEmpty())) {
             mYahooOverviewQuote.Open = cachedStockOpen;
         }
