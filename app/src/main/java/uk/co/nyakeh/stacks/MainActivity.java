@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity
                     Log.d("MainActivity", "response = " + new Gson().toJson(response.body()));
                     YahooOverviewResponse result = response.body();
                     mYahooOverviewQuote = result.query.results.quote;
-                    mSharedPreferences.edit().putString(STOCK_OPEN_KEY, mYahooOverviewQuote.Open).apply();
+                    if (mYahooOverviewQuote.Open != null && !mYahooOverviewQuote.Open.isEmpty()) {
+                        mSharedPreferences.edit().putString(STOCK_OPEN_KEY, mYahooOverviewQuote.Open).apply();
+                    }
                     updateUI();
                 } else {
                     Log.d("Api Error", response.toString());
