@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView mChangeInPercentTextView;
     TextView mOpenTextView;
     TextView mStockValuation;
+    TextView mStockDailyValuationChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mChangeInPercentTextView = (TextView) findViewById(R.id.stockChangeInPercent);
         mOpenTextView = (TextView) findViewById(R.id.stockOpen);
         mStockValuation = (TextView) findViewById(R.id.stockValuation);
+        mStockDailyValuationChange = (TextView) findViewById(R.id.stockDailyValuationChange);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mOpenTextView.setText("£" + mYahooOverviewQuote.Open);
         mStockPriceChangeTextView.setText(String.format("%.2f GBP", stockPriceChange));
         mStockValuation.setText(String.format("£%.2f", currentStockValue));
+
+        double dayValuationChange = currentStockValue * (Double.valueOf(mYahooOverviewQuote.Change) / 100);
+        mStockDailyValuationChange.setText(String.format("%.2f", dayValuationChange));
     }
 
     @Override
