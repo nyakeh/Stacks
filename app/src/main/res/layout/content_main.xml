@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="lifetime"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"/>
 
         <TextView
@@ -64,6 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="daily gains"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"/>
 
         <TextView
@@ -102,6 +104,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="..."
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 tools:text="+7.00"/>
 
@@ -127,6 +130,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="..."
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 tools:text="+0.27%"/>
 
@@ -153,6 +157,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="..."
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 tools:text="£25.87"/>
 
@@ -179,6 +184,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="..."
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 tools:text="VMID.L"/>
         </LinearLayout>
@@ -203,6 +209,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="..."
+                android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 tools:text="£986.47"/>
 
