@@ -27,6 +27,21 @@
             android:textSize="30sp"
             android:textStyle="bold"/>
 
+        <View
+            android:layout_width="160dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="lifetime"
+            android:textSize="20sp"/>
+
         <TextView
             android:id="@+id/stockPriceChange"
             android:layout_width="match_parent"
@@ -35,6 +50,21 @@
             android:text="..."
             android:textSize="40sp"
             android:textStyle="bold"/>
+
+        <View
+            android:layout_width="160dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="daily gains"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/stockDailyValuationChange"
