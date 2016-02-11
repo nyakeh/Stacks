@@ -107,11 +107,10 @@ public class MainActivity extends AppCompatActivity
             mYahooOverviewQuote.Open = cachedStockOpen;
         }
 
-        Double myStockPurchaseValue = 35 * 28.126;
-        Double currentStockValue = 35 * Double.valueOf(mYahooOverviewQuote.Open);
+        double myStockPurchaseValue = 35 * 28.126;
+        double currentStockValue = 35 * Double.valueOf(mYahooOverviewQuote.Open);
         double stockPriceChange = currentStockValue - myStockPurchaseValue;
-        mStockPriceChangeTextView.setText(String.valueOf(stockPriceChange));
-
+        mStockPriceChangeTextView.setText(String.format("$%.2f", stockPriceChange));
     }
 
     @Override
