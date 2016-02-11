@@ -1,6 +1,8 @@
 package uk.co.nyakeh.stacks;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,7 +23,9 @@ import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String STOCK_OPEN_KEY = "VMID.L|OPEN";
     private YahooOverviewQuote mYahooOverviewQuote;
+    private SharedPreferences mSharedPreferences;
     TextView mNameTextView;
     TextView mStockPriceChangeTextView;
     TextView mSymbolTextView;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mSharedPreferences = this.getSharedPreferences("uk.co.nyakeh.stacks", Context.MODE_PRIVATE);
 
         mNameTextView = (TextView) findViewById(R.id.stockName);
         mStockPriceChangeTextView = (TextView) findViewById(R.id.stockPriceChange);
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity
                     Log.d("MainActivity", "response = " + new Gson().toJson(response.body()));
                     YahooOverviewResponse result = response.body();
                     mYahooOverviewQuote = result.query.results.quote;
+                    mSharedPreferences.edit().putString(STOCK_OPEN_KEY, mYahooOverviewQuote.Open).apply();
                     updateUI();
                 } else {
                     Log.d("Api Error", response.toString());
@@ -92,12 +99,17 @@ public class MainActivity extends AppCompatActivity
         mChangeInPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
         mOpenTextView.setText(mYahooOverviewQuote.Open);
 
-        if (mYahooOverviewQuote.Open != null && !mYahooOverviewQuote.Open.isEmpty()) {
-            Double myStockPurchaseValue = 35 * 28.126;
-            Double currentStockValue = 35 * Double.valueOf(mYahooOverviewQuote.Open);
-            double stockPriceChange = currentStockValue - myStockPurchaseValue;
-            mStockPriceChangeTextView.setText(String.valueOf(stockPriceChange));
+        String cachedStockOpen = mSharedPreferences.getString(STOCK_OPEN_KEY, "");
+        Log.d("cachedStockOpen: ", cachedStockOpen);
+        if (mYahooOverviewQuote.Open == null && mYahooOverviewQuote.Open.isEmpty() && (!cachedStockOpen.isEmpty())) {
+            mYahooOverviewQuote.Open = cachedStockOpen;
         }
+
+        Double myStockPurchaseValue = 35 * 28.126;
+        Double currentStockValue = 35 * Double.valueOf(mYahooOverviewQuote.Open);
+        double stockPriceChange = currentStockValue - myStockPurchaseValue;
+        mStockPriceChangeTextView.setText(String.valueOf(stockPriceChange));
+
     }
 
     @Override
