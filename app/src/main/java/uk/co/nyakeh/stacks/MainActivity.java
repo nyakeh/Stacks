@@ -19,9 +19,13 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.List;
+
 import retrofit2.Call;
+import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.FinanceApi.YahooOverviewQuote;
 import uk.co.nyakeh.stacks.objects.FinanceApi.YahooOverviewResponse;
+import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String STOCK_PRICE_KEY = "VMID.L|PRICE";
@@ -110,15 +114,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mYahooOverviewQuote.Open = cachedStockOpen;
         }
 
-        double myStockPurchaseValue = 35 * 28.126;
-        double currentStockValue = 35 * Double.valueOf(mYahooOverviewQuote.Open);
-        double stockPriceChange = currentStockValue - myStockPurchaseValue;
+        double purchasedStockTotal = 0;
+        int purchasedStockQuantity = 0;
+        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
+        for (StockPurchase stockPurchase : stockPurchaseHistory) {
+            purchasedStockTotal += stockPurchase.Total;
+            purchasedStockQuantity += stockPurchase.Quantity;
+        }
+        double currentStockValue = purchasedStockQuantity * Double.valueOf(mYahooOverviewQuote.Open);
+        double stockPriceChange = currentStockValue - purchasedStockTotal;
 
         mOpenTextView.setText("£" + mYahooOverviewQuote.Open);
         mStockPriceChangeTextView.setText(String.format("%.2f GBP", stockPriceChange));
         mStockValuation.setText(String.format("£%.2f", currentStockValue));
 
-        double dayValuationChange = currentStockValue * (Double.valueOf(mYahooOverviewQuote.Change) / 100);
+        double dayValuationChange = currentStockValue * (Double.valueOf(mYahooOverviewQuote.ChangeinPercent.replace("%","")) / 100);
         mStockDailyValuationChange.setText(String.format("%.2f", dayValuationChange));
     }
 
