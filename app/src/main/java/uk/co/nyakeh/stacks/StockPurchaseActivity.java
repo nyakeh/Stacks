@@ -4,18 +4,27 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
+import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class StockPurchaseActivity extends AppCompatActivity {
+    private RecyclerView mRecyclerView;
+    private StockPurchaseAdapter mStockPurchaseAdapter;
     private EditText mSymbolField;
     private EditText mPriceField;
     private EditText mQuantityField;
@@ -42,10 +51,85 @@ public class StockPurchaseActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.stockPurchase_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        updateUI();
     }
 
     private void addStockPurchase() {
         StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), new Date(), Double.parseDouble(mPriceField.getText().toString()), Integer.parseInt(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
         StockLab.get(this).addStockPurchase(stockPurchase);
+        updateUI();
+    }
+
+    private void updateUI() {
+        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
+
+        if (mStockPurchaseAdapter == null) {
+            mStockPurchaseAdapter = new StockPurchaseAdapter(stockPurchaseHistory);
+            mRecyclerView.setAdapter(mStockPurchaseAdapter);
+        } else {
+            mStockPurchaseAdapter.setStockPurchases(stockPurchaseHistory);
+            mStockPurchaseAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private class StockPurchaseHolder extends RecyclerView.ViewHolder {
+
+        private TextView mSymbolTextView;
+        private TextView mDatePurchasedTextView;
+        private TextView mPriceTextView;
+        private TextView mQuantityTextView;
+        private TextView mFeeTextView;
+        private TextView mTotalTextView;
+
+        public StockPurchaseHolder(View itemView) {
+            super(itemView);
+            mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_stock_symbol);
+            mDatePurchasedTextView = (TextView) itemView.findViewById(R.id.list_item_stock_date);
+            mTotalTextView = (TextView) itemView.findViewById(R.id.list_item_stock_open);
+        }
+
+        private void bindStockPurchase(StockPurchase stockPurchase) {
+            mSymbolTextView.setText(stockPurchase.Symbol);
+            String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", stockPurchase.DatePurchased).toString();
+            mDatePurchasedTextView.setText(datePurchased);
+//            mPriceTextView.setText(String.format("%.2f", stockPurchase.Price));
+//            mQuantityTextView.setText(stockPurchase.Quantity);
+//            mFeeTextView.setText(String.format("%.2f", stockPurchase.Fee));
+            mTotalTextView.setText(String.format("%.2f", stockPurchase.Total));
+        }
+    }
+
+    private class StockPurchaseAdapter extends RecyclerView.Adapter<StockPurchaseHolder> {
+        private List<StockPurchase> mStockPurchases;
+
+        public StockPurchaseAdapter(List<StockPurchase> stockPurchases) {
+            mStockPurchases = stockPurchases;
+        }
+
+        @Override
+        public StockPurchaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(StockPurchaseActivity.this);
+            View view = layoutInflater.inflate(R.layout.list_item_stock, parent, false);
+            return new StockPurchaseHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(StockPurchaseHolder stockPurchaseHolder, int position) {
+            StockPurchase stockPurchase = mStockPurchases.get(position);
+            stockPurchaseHolder.bindStockPurchase(stockPurchase);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mStockPurchases.size();
+        }
+
+        public void setStockPurchases(List<StockPurchase> stockPurchases) {
+            mStockPurchases = stockPurchases;
+        }
     }
 }

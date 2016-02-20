@@ -17,30 +17,30 @@
         android:padding="@dimen/auxiliary_margin">
 
         <TextView
-            android:id="@+id/list_item_book_title"
+            android:id="@+id/list_item_stock_symbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textStyle="bold"
-            tools:text="The Lean Startup"/>
+            tools:text="VMID.L"/>
 
         <TextView
-            android:id="@+id/list_item_book_author"
+            android:id="@+id/list_item_stock_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/list_item_book_title"
+            android:layout_below="@+id/list_item_stock_symbol"
             android:padding="4dp"
-            tools:text="Eric Ries"/>
+            tools:text="Sat, 20 Feb"/>
 
         <TextView
-            android:id="@+id/list_item_book_progress"
+            android:id="@+id/list_item_stock_open"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/list_item_book_author"
+            android:layout_below="@+id/list_item_stock_date"
             android:paddingLeft="4dp"
             android:paddingTop="4dp"
             android:textStyle="bold"
-            tools:text="74"/>
+            tools:text="26.24"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

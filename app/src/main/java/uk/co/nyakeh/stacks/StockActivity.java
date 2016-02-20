@@ -157,23 +157,23 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private class StockHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView mTitleTextView;
-        private TextView mAuthorTextView;
-        private TextView mProgressTextView;
+        private TextView mSymbolTextView;
+        private TextView mDateTextView;
+        private TextView mOpenTextView;
 
         public StockHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
-            mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
-            mProgressTextView = (TextView) itemView.findViewById(R.id.list_item_book_progress);
+            mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_stock_symbol);
+            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_stock_date);
+            mOpenTextView = (TextView) itemView.findViewById(R.id.list_item_stock_open);
         }
 
         private void bindQuote(YahooStockQuote yahooQuote) {
-            mTitleTextView.setText(yahooQuote.Symbol);
-            mAuthorTextView.setText(yahooQuote.Date);
-            mProgressTextView.setText(yahooQuote.Open);
+            mSymbolTextView.setText(yahooQuote.Symbol);
+            mDateTextView.setText(yahooQuote.Date);
+            mOpenTextView.setText(yahooQuote.Open);
         }
 
         @Override
