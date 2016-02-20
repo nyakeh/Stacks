@@ -141,9 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_main) {
-
-        } else if (id == R.id.nav_stock) {
+        if (id == R.id.nav_stock) {
             Intent intent = new Intent(this, StockActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_purchaseHistory) {

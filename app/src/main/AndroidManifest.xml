@@ -25,12 +25,7 @@
         </activity>
         <activity
             android:name=".StockPurchaseActivity"
-            android:label="@string/title_activity_stock_purchase"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.co.nyakeh.stacks.MainActivity"/>
+            android:label="@string/title_activity_stock_purchase">
         </activity>
     </application>
 
