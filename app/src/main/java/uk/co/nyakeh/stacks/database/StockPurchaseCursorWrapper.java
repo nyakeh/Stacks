@@ -9,13 +9,13 @@ import java.util.UUID;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
 
-public class StockCursorWrapper extends CursorWrapper {
+public class StockPurchaseCursorWrapper extends CursorWrapper {
 
-    public StockCursorWrapper(Cursor cursor) {
+    public StockPurchaseCursorWrapper(Cursor cursor) {
         super(cursor);
     }
 
-    public StockPurchase getStockPurchases() {
+    public StockPurchase getStockPurchase() {
         String id = getString(getColumnIndex(StockPurchaseTable.Cols.ID));
         String symbol = getString(getColumnIndex(StockPurchaseTable.Cols.SYMBOL));
         Long datePurchased = getLong(getColumnIndex(StockPurchaseTable.Cols.DATE_PURCHASED));

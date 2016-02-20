@@ -2,10 +2,14 @@ package uk.co.nyakeh.stacks.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import uk.co.nyakeh.stacks.objects.StockPurchase;
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
+import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class StockLab {
     private static StockLab sStockLab;
@@ -28,6 +32,35 @@ public class StockLab {
     public void addStockPurchase(StockPurchase stockPurchase) {
         ContentValues values = getStockPurchaseContentValues(stockPurchase);
         mDatabase.insert(StockPurchaseTable.NAME, null, values);
+    }
+
+    public List<StockPurchase> getStockPurchaseHistory(String stockSymbol) {
+        ArrayList<StockPurchase> stockPurchases = new ArrayList<>();
+        StockPurchaseCursorWrapper cursor = queryStockPurchases(StockPurchaseTable.Cols.SYMBOL + " = ?", new String[]{stockSymbol});
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                StockPurchase stockPurchase = cursor.getStockPurchase();
+                stockPurchases.add(stockPurchase);
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return stockPurchases;
+    }
+
+    private StockPurchaseCursorWrapper queryStockPurchases(String whereClause, String[] whereArgs) {
+        Cursor cursor = mDatabase.query(StockPurchaseTable.NAME,
+                null,  // Columns - null selects *
+                whereClause,
+                whereArgs,
+                null,  // groupBy
+                null,  // having
+                null); // orderBy
+
+        return new StockPurchaseCursorWrapper(cursor);
     }
 
     private ContentValues getStockPurchaseContentValues(StockPurchase stockPurchase) {
