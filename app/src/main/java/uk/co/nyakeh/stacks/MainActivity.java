@@ -146,8 +146,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_stock) {
             Intent intent = new Intent(this, StockActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_graph) {
-
+        } else if (id == R.id.nav_purchaseHistory) {
+            Intent intent = new Intent(this, StockPurchaseActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);

@@ -11,4 +11,7 @@
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
     <string name="fee">Fee</string>
+    <string name="home">Home</string>
+    <string name="stock">Stock</string>
+    <string name="purchase_history">Purchase History</string>
 </resources>

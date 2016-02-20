@@ -56,7 +56,6 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
                 getLatestStockData();
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
         });
 
@@ -145,10 +144,9 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
         if (id == R.id.nav_main) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_stock) {
-
-        } else if (id == R.id.nav_graph) {
-
+        } else if (id == R.id.nav_purchaseHistory) {
+            Intent intent = new Intent(this, StockPurchaseActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stock_drawer_layout);
