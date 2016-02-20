@@ -1,9 +1,9 @@
-package uk.co.nyakeh.stacks;
+package uk.co.nyakeh.stacks.Objects.FinanceApi;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class YahooOverviewQuery {
+public class YahooStockQuery {
 
     @SerializedName("count")
     @Expose
@@ -16,5 +16,5 @@ public class YahooOverviewQuery {
     public String lang;
     @SerializedName("results")
     @Expose
-    public YahooOverviewResults results;
+    public YahooStockResults results;
 }

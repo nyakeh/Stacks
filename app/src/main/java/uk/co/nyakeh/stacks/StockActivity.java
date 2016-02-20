@@ -29,6 +29,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.nyakeh.stacks.Objects.FinanceApi.YahooStockQuery;
+import uk.co.nyakeh.stacks.Objects.FinanceApi.YahooStockQuote;
+import uk.co.nyakeh.stacks.Objects.FinanceApi.YahooStockResponse;
 
 public class StockActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String STOCK_PRICE_KEY = "VMID.L|PRICE";

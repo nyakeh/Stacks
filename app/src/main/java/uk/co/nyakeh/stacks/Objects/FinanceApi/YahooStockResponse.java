@@ -1,10 +1,10 @@
-package uk.co.nyakeh.stacks;
+package uk.co.nyakeh.stacks.Objects.FinanceApi;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class YahooOverviewResponse {
+public class YahooStockResponse {
     @SerializedName("query")
     @Expose
-    public YahooOverviewQuery query;
+    public YahooStockQuery query;
 }

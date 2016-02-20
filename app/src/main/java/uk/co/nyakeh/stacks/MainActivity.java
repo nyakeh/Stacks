@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
+import uk.co.nyakeh.stacks.Objects.FinanceApi.YahooOverviewQuote;
+import uk.co.nyakeh.stacks.Objects.FinanceApi.YahooOverviewResponse;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public static final String STOCK_PRICE_KEY = "VMID.L|PRICE";
