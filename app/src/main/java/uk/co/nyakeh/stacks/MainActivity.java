@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         double stockPriceChange = currentStockValue - purchasedStockTotal;
 
         mOpenTextView.setText("£" + mYahooOverviewQuote.Open);
-        mStockPriceChangeTextView.setText(String.format("%.2f GBP", stockPriceChange));
+        mStockPriceChangeTextView.setText(String.format("%.2f", stockPriceChange));
         mStockValuation.setText(String.format("£%.2f", currentStockValue));
 
         double dayValuationChange = currentStockValue * (Double.valueOf(mYahooOverviewQuote.ChangeinPercent.replace("%","")) / 100);
