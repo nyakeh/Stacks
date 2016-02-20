@@ -9,7 +9,7 @@ public class StockDbSchema {
             public static final String SYMBOL = "symbol";
             public static final String DATE_PURCHASED = "datePurchased";
             public static final String PRICE = "price";
-            public static final String COUNT = "count";
+            public static final String QUANTITY = "quantity";
             public static final String FEE = "fee";
             public static final String TOTAL = "total";
         }

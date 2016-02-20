@@ -69,7 +69,7 @@ public class StockLab {
         values.put(StockPurchaseTable.Cols.SYMBOL, stockPurchase.Symbol);
         values.put(StockPurchaseTable.Cols.DATE_PURCHASED, stockPurchase.DatePurchased.getTime());
         values.put(StockPurchaseTable.Cols.PRICE, stockPurchase.Price);
-        values.put(StockPurchaseTable.Cols.COUNT, stockPurchase.Count);
+        values.put(StockPurchaseTable.Cols.QUANTITY, stockPurchase.Quantity);
         values.put(StockPurchaseTable.Cols.FEE, stockPurchase.Fee);
         values.put(StockPurchaseTable.Cols.TOTAL, stockPurchase.Total);
         return values;

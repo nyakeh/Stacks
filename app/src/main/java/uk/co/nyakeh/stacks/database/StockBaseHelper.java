@@ -16,7 +16,7 @@ public class StockBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + StockPurchaseTable.NAME + "(" + StockPurchaseTable.Cols.ID + ", " + StockPurchaseTable.Cols.SYMBOL + ", " + StockPurchaseTable.Cols.DATE_PURCHASED + ", " + StockPurchaseTable.Cols.PRICE + ", " + StockPurchaseTable.Cols.COUNT + ", " + StockPurchaseTable.Cols.FEE + ", " + StockPurchaseTable.Cols.TOTAL + ")");
+        db.execSQL("create table " + StockPurchaseTable.NAME + "(" + StockPurchaseTable.Cols.ID + ", " + StockPurchaseTable.Cols.SYMBOL + ", " + StockPurchaseTable.Cols.DATE_PURCHASED + ", " + StockPurchaseTable.Cols.PRICE + ", " + StockPurchaseTable.Cols.QUANTITY + ", " + StockPurchaseTable.Cols.FEE + ", " + StockPurchaseTable.Cols.TOTAL + ")");
     }
 
     @Override

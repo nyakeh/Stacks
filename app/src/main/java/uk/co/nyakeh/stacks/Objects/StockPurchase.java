@@ -8,16 +8,16 @@ public class StockPurchase {
     public String Symbol;
     public Date DatePurchased;
     public int Price;
-    public int Count;
+    public int Quantity;
     public double Fee;
     public double Total;
 
-    public StockPurchase(UUID id, String symbol, Date datePurchased, int price, int count, double fee, double total) {
+    public StockPurchase(UUID id, String symbol, Date datePurchased, int price, int quantity, double fee, double total) {
         Id = id;
         Symbol = symbol;
         DatePurchased = datePurchased;
         Price = price;
-        Count = count;
+        Quantity = quantity;
         Fee = fee;
         Total = total;
     }
