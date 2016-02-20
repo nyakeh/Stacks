@@ -7,4 +7,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="stockName">Vanguard FTSE 250 ETF</string>
     <string name="title_activity_stock_purchase">StockPurchaseActivity</string>
+    <string name="symbol">Symbol</string>
+    <string name="price">Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="fee">Fee</string>
 </resources>

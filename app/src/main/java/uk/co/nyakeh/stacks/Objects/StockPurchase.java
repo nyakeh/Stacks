@@ -7,12 +7,22 @@ public class StockPurchase {
     public UUID Id;
     public String Symbol;
     public Date DatePurchased;
-    public int Price;
+    public double Price;
     public int Quantity;
     public double Fee;
     public double Total;
 
-    public StockPurchase(UUID id, String symbol, Date datePurchased, int price, int quantity, double fee, double total) {
+    public StockPurchase(UUID id, String symbol, Date datePurchased, double price, int quantity, double fee) {
+        Id = id;
+        Symbol = symbol;
+        DatePurchased = datePurchased;
+        Price = price;
+        Quantity = quantity;
+        Fee = fee;
+        Total = (quantity * price) + fee;
+    }
+
+    public StockPurchase(UUID id, String symbol, Date datePurchased, double price, int quantity, double fee, double total) {
         Id = id;
         Symbol = symbol;
         DatePurchased = datePurchased;

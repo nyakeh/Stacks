@@ -23,26 +23,26 @@
             android:id="@+id/newStockPurchase_symbol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Symbol"
+            android:hint="@string/symbol"
             android:text="VMID.L"/>
 
         <EditText
             android:id="@+id/newStockPurchase_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Price"/>
+            android:hint="@string/price"/>
 
         <EditText
             android:id="@+id/newStockPurchase_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Quantity"/>
+            android:hint="@string/quantity"/>
 
         <EditText
             android:id="@+id/newStockPurchase_fee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Fee"/>
+            android:hint="@string/fee"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
