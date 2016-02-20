@@ -30,18 +30,21 @@
             android:id="@+id/newStockPurchase_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             android:hint="@string/price"/>
 
         <EditText
             android:id="@+id/newStockPurchase_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="@string/quantity"/>
 
         <EditText
             android:id="@+id/newStockPurchase_fee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             android:hint="@string/fee"/>
     </LinearLayout>
 
