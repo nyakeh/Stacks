@@ -6,7 +6,7 @@ import android.database.CursorWrapper;
 import java.util.Date;
 import java.util.UUID;
 
-import uk.co.nyakeh.stacks.Objects.StockPurchase;
+import uk.co.nyakeh.stacks.objects.StockPurchase;
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
 
 public class StockCursorWrapper extends CursorWrapper {

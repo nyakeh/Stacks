@@ -11,8 +11,8 @@ import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import uk.co.nyakeh.stacks.Objects.FinanceApi.YahooOverviewResponse;
-import uk.co.nyakeh.stacks.Objects.FinanceApi.YahooStockResponse;
+import uk.co.nyakeh.stacks.objects.FinanceApi.YahooOverviewResponse;
+import uk.co.nyakeh.stacks.objects.FinanceApi.YahooStockResponse;
 
 public class RestClient {
     private static FinanceApiInterface sFinanceApiInterface;
