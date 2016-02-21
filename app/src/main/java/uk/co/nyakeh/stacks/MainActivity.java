@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -116,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         double purchasedStockTotal = 0;
         int purchasedStockQuantity = 0;
-        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
+        List<StockPurchase> stockPurchaseHistory = new ArrayList<>();
+        stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
         for (StockPurchase stockPurchase : stockPurchaseHistory) {
             purchasedStockTotal += stockPurchase.Total;
             purchasedStockQuantity += stockPurchase.Quantity;
