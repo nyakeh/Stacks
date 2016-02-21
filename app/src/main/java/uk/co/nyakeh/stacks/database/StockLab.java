@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
@@ -49,6 +50,10 @@ public class StockLab {
             cursor.close();
         }
         return stockPurchases;
+    }
+
+    public void deleteStockPurchase(UUID id) {
+        mDatabase.delete(StockPurchaseTable.NAME, StockPurchaseTable.Cols.ID + " = ?", new String[]{id.toString()});
     }
 
     private StockPurchaseCursorWrapper queryStockPurchases(String whereClause, String[] whereArgs) {
