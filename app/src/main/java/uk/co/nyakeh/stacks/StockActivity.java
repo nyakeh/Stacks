@@ -163,9 +163,9 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_stock_symbol);
-            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_stock_date);
-            mOpenTextView = (TextView) itemView.findViewById(R.id.list_item_stock_open);
+            mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_symbol);
+            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_date);
+            mOpenTextView = (TextView) itemView.findViewById(R.id.list_item_total);
         }
 
         private void bindQuote(YahooStockQuote yahooQuote) {

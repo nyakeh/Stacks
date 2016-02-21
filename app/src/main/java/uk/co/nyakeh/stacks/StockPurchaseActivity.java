@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -124,26 +123,26 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         private TextView mDatePurchasedTextView;
         private TextView mPriceTextView;
         private TextView mQuantityTextView;
-        private TextView mFeeTextView;
         private TextView mTotalTextView;
 
         public StockPurchaseHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_stock_symbol);
-            mDatePurchasedTextView = (TextView) itemView.findViewById(R.id.list_item_stock_date);
-            mTotalTextView = (TextView) itemView.findViewById(R.id.list_item_stock_open);
+            mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_symbol);
+            mDatePurchasedTextView = (TextView) itemView.findViewById(R.id.list_item_date);
+            mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_price);
+            mQuantityTextView = (TextView) itemView.findViewById(R.id.list_item_quantity);
+            mTotalTextView = (TextView) itemView.findViewById(R.id.list_item_total);
         }
 
         private void bindStockPurchase(StockPurchase stockPurchase) {
             mStockPurchase = stockPurchase;
-            mSymbolTextView.setText(stockPurchase.Symbol);
-            String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", stockPurchase.DatePurchased).toString();
+            mSymbolTextView.setText(mStockPurchase.Symbol);
+            String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", mStockPurchase.DatePurchased).toString();
             mDatePurchasedTextView.setText(datePurchased);
-//            mPriceTextView.setText(String.format("%.2f", stockPurchase.Price));
-//            mQuantityTextView.setText(stockPurchase.Quantity);
-//            mFeeTextView.setText(String.format("%.2f", stockPurchase.Fee));
-            mTotalTextView.setText(String.format("%.2f", stockPurchase.Total));
+            mPriceTextView.setText(String.format("%.2f", mStockPurchase.Price));
+            mQuantityTextView.setText(String.valueOf(mStockPurchase.Quantity));
+            mTotalTextView.setText(String.format("%.2f", mStockPurchase.Total));
         }
 
         @Override
@@ -163,7 +162,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         @Override
         public StockPurchaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(StockPurchaseActivity.this);
-            View view = layoutInflater.inflate(R.layout.list_item_stock, parent, false);
+            View view = layoutInflater.inflate(R.layout.list_item_stock_history, parent, false);
             return new StockPurchaseHolder(view);
         }
 

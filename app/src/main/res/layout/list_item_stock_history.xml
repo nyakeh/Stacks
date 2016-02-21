@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/auxiliary_margin">
+
+    <TextView
+        android:id="@+id/list_label_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        tools:text="Symbol: "/>
+
+    <TextView
+        android:id="@+id/list_item_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/list_label_symbol"
+        android:padding="2dp"
+        android:textStyle="bold"
+        tools:text="VMID.L"/>
+
+    <TextView
+        android:id="@+id/list_label_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_symbol"
+        android:padding="2dp"
+        tools:text="Total: "/>
+
+    <TextView
+        android:id="@+id/list_item_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_symbol"
+        android:layout_toRightOf="@+id/list_label_total"
+        android:padding="2dp"
+        android:textStyle="bold"
+        tools:text="994.41"/>
+
+    <TextView
+        android:id="@+id/list_label_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_total"
+        android:padding="2dp"
+        tools:text="Price: "/>
+
+    <TextView
+        android:id="@+id/list_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_total"
+        android:layout_toRightOf="@+id/list_label_price"
+        android:padding="2dp"
+        android:textStyle="bold"
+        tools:text="28.126"/>
+
+    <TextView
+        android:id="@+id/list_label_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_label_price"
+        android:padding="2dp"
+        tools:text="Quantity: "/>
+
+    <TextView
+        android:id="@+id/list_item_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_price"
+        android:layout_toRightOf="@+id/list_label_quantity"
+        android:padding="2dp"
+        android:textStyle="bold"
+        tools:text="35"/>
+
+    <TextView
+        android:id="@+id/list_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        tools:text="Saturday, Feb 10 2016"/>
+
+</RelativeLayout>

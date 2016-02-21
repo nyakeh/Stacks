@@ -17,7 +17,7 @@
         android:padding="@dimen/auxiliary_margin">
 
         <TextView
-            android:id="@+id/list_item_stock_symbol"
+            android:id="@+id/list_item_symbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
@@ -25,18 +25,18 @@
             tools:text="VMID.L"/>
 
         <TextView
-            android:id="@+id/list_item_stock_date"
+            android:id="@+id/list_item_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/list_item_stock_symbol"
+            android:layout_below="@+id/list_item_symbol"
             android:padding="4dp"
             tools:text="Sat, 20 Feb"/>
 
         <TextView
-            android:id="@+id/list_item_stock_open"
+            android:id="@+id/list_item_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/list_item_stock_date"
+            android:layout_below="@+id/list_item_date"
             android:paddingLeft="4dp"
             android:paddingTop="4dp"
             android:textStyle="bold"
