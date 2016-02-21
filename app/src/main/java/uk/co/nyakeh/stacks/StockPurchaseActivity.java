@@ -17,8 +17,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -127,7 +127,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         private TextView mPriceTextView;
         private TextView mQuantityTextView;
         private TextView mTotalTextView;
-        private Button mDeleteButton;
+        private ImageButton mDeleteButton;
 
         public StockPurchaseHolder(View itemView) {
             super(itemView);
@@ -136,7 +136,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_price);
             mQuantityTextView = (TextView) itemView.findViewById(R.id.list_item_quantity);
             mTotalTextView = (TextView) itemView.findViewById(R.id.list_item_total);
-            mDeleteButton = (Button) itemView.findViewById(R.id.list_item_delete);
+            mDeleteButton = (ImageButton) itemView.findViewById(R.id.list_item_delete);
             mDeleteButton.setOnClickListener(this);
         }
 

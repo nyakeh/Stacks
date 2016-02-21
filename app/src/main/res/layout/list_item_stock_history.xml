@@ -1,94 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
     android:padding="@dimen/auxiliary_margin">
 
-    <TextView
-        android:id="@+id/list_label_symbol"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:text="Symbol: "/>
+        android:layout_marginBottom="@dimen/auxiliary_margin"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/list_item_symbol"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/list_item_symbol"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/list_label_symbol"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:padding="2dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="VMID.L"/>
+
+        <TextView
+            android:id="@+id/list_item_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_weight="2"
+            tools:text="Saturday, Feb 10 2016"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_label_symbol"
-        android:padding="2dp"
-        android:textStyle="bold"
-        tools:text="VMID.L"/>
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/list_label_total"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/list_label_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_item_total"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:padding="2dp"
+            android:text="Price: "/>
+
+        <TextView
+            android:id="@+id/list_item_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_item_total"
+            android:layout_toRightOf="@+id/list_label_price"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:textStyle="bold"
+            tools:text="28.126"/>
+
+        <TextView
+            android:id="@+id/list_label_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_label_price"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:padding="2dp"
+            android:text="Quantity: "/>
+
+        <TextView
+            android:id="@+id/list_item_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_item_price"
+            android:layout_toRightOf="@+id/list_label_quantity"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:textStyle="bold"
+            tools:text="35"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_symbol"
-        android:padding="2dp"
-        android:text="Total: "/>
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/list_item_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_symbol"
-        android:layout_toRightOf="@+id/list_label_total"
-        android:padding="2dp"
-        android:textStyle="bold"
-        tools:text="994.41"/>
+        <TextView
+            android:id="@+id/list_label_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_item_symbol"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:padding="2dp"
+            android:text="Total: "/>
 
-    <TextView
-        android:id="@+id/list_label_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_total"
-        android:padding="2dp"
-        android:text="Price: "/>
+        <TextView
+            android:id="@+id/list_item_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_item_symbol"
+            android:layout_toRightOf="@+id/list_label_total"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:textStyle="bold"
+            tools:text="994.41"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="right">
 
-    <TextView
-        android:id="@+id/list_item_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_total"
-        android:layout_toRightOf="@+id/list_label_price"
-        android:padding="2dp"
-        android:textStyle="bold"
-        tools:text="28.126"/>
+            <ImageButton
+                android:id="@+id/list_item_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete"
+                android:tint="@color/colorAccent"
+                android:background="@color/cardview_light_background"/>
 
-    <TextView
-        android:id="@+id/list_label_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_label_price"
-        android:padding="2dp"
-        android:text="Quantity: "/>
-
-    <TextView
-        android:id="@+id/list_item_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_price"
-        android:layout_toRightOf="@+id/list_label_quantity"
-        android:padding="2dp"
-        android:textStyle="bold"
-        tools:text="35"/>
-
-    <TextView
-        android:id="@+id/list_item_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-        tools:text="Saturday, Feb 10 2016"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="delete"
-        android:id="@+id/list_item_delete"/>
-
-</RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
