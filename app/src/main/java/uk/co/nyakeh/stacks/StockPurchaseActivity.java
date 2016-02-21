@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -68,6 +69,8 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
 
         mRecyclerView = (RecyclerView) findViewById(R.id.stockPurchase_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+
         updateUI();
     }
 
@@ -124,15 +127,17 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         private TextView mPriceTextView;
         private TextView mQuantityTextView;
         private TextView mTotalTextView;
+        private Button mDeleteButton;
 
         public StockPurchaseHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_symbol);
             mDatePurchasedTextView = (TextView) itemView.findViewById(R.id.list_item_date);
             mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_price);
             mQuantityTextView = (TextView) itemView.findViewById(R.id.list_item_quantity);
             mTotalTextView = (TextView) itemView.findViewById(R.id.list_item_total);
+            mDeleteButton = (Button) itemView.findViewById(R.id.list_item_delete);
+            mDeleteButton.setOnClickListener(this);
         }
 
         private void bindStockPurchase(StockPurchase stockPurchase) {

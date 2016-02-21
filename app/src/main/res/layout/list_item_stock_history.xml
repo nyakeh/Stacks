@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="@color/colorPrimaryLight"
     android:padding="@dimen/auxiliary_margin">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="2dp"
-        tools:text="Symbol: "/>
+        android:text="Symbol: "/>
 
     <TextView
         android:id="@+id/list_item_symbol"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_symbol"
         android:padding="2dp"
-        tools:text="Total: "/>
+        android:text="Total: "/>
 
     <TextView
         android:id="@+id/list_item_total"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_total"
         android:padding="2dp"
-        tools:text="Price: "/>
+        android:text="Price: "/>
 
     <TextView
         android:id="@+id/list_item_price"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_label_price"
         android:padding="2dp"
-        tools:text="Quantity: "/>
+        android:text="Quantity: "/>
 
     <TextView
         android:id="@+id/list_item_quantity"
@@ -84,5 +84,11 @@
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         tools:text="Saturday, Feb 10 2016"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="delete"
+        android:id="@+id/list_item_delete"/>
 
 </RelativeLayout>
