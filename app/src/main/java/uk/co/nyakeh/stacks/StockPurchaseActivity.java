@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
@@ -35,6 +36,8 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     private EditText mPriceField;
     private EditText mQuantityField;
     private EditText mFeeField;
+    private static final String WHOLE_NUMBER_REGEX = "(^[0-9]+)(?!.+)";
+    private static final String MONEY_VALUE_REGEX = "(\\d*\\.\\d{1,2}|\\d+)$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,6 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             @Override
             public void onClick(View view) {
                 addStockPurchase();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 
@@ -71,9 +73,20 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     }
 
     private void addStockPurchase() {
-        StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), new Date(), Double.parseDouble(mPriceField.getText().toString()), Integer.parseInt(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
-        StockLab.get(this).addStockPurchase(stockPurchase);
-        updateUI();
+        if (purchaseInputValid()){
+            StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), new Date(), Double.parseDouble(mPriceField.getText().toString()), Integer.parseInt(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
+            StockLab.get(this).addStockPurchase(stockPurchase);
+            updateUI();
+            Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Stock purchase stored", Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean purchaseInputValid() {
+        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(MONEY_VALUE_REGEX, mPriceField.getText().toString()) || !Pattern.matches(WHOLE_NUMBER_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
+            Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     private void updateUI() {
