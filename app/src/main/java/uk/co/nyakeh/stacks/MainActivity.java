@@ -19,10 +19,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.FinanceApi.YahooOverviewQuote;
 import uk.co.nyakeh.stacks.objects.FinanceApi.YahooOverviewResponse;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        getLatestStockData();
+        //getLatestStockData();
     }
 
     private void getLatestStockData() {
@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Call<YahooOverviewResponse> call = service.getStockOverview();
         call.enqueue(new retrofit2.Callback<YahooOverviewResponse>() {
             @Override
-            public void onResponse(retrofit2.Response<YahooOverviewResponse> response) {
-                if (response.isSuccess()) {
+            public void onResponse(Call<YahooOverviewResponse> call, Response<YahooOverviewResponse> response) {
+                if (response.isSuccessful()) {
                     Log.d("MainActivity", "response = " + new Gson().toJson(response.body()));
                     YahooOverviewResponse result = response.body();
                     mYahooOverviewQuote = result.query.results.quote;
@@ -93,12 +93,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                     updateUI();
                 } else {
-                    Log.d("Api Error", response.toString());
+                    Log.d("Api Error", response.raw().toString());
                 }
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<YahooOverviewResponse> call, Throwable t)
+            {
                 Log.d("MainActivity", "Status Code = " + t.getMessage());
             }
         });
@@ -111,19 +112,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mChangeInPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
 
         String cachedStockOpen = mSharedPreferences.getString(STOCK_PRICE_KEY, "");
-        if (mYahooOverviewQuote.Open == null && mYahooOverviewQuote.Open.isEmpty() && (!cachedStockOpen.isEmpty())) {
+        if (mYahooOverviewQuote.Open == null && mYahooOverviewQuote.Open == "" && cachedStockOpen != "") {
             mYahooOverviewQuote.Open = cachedStockOpen;
         }
 
         double purchasedStockTotal = 0;
         int purchasedStockQuantity = 0;
-        List<StockPurchase> stockPurchaseHistory = new ArrayList<>();
-        stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
+        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
         for (StockPurchase stockPurchase : stockPurchaseHistory) {
             purchasedStockTotal += stockPurchase.Total;
             purchasedStockQuantity += stockPurchase.Quantity;
         }
-        double currentStockValue = purchasedStockQuantity * Double.valueOf(mYahooOverviewQuote.Open);
+        double currentStockValue = purchasedStockQuantity * (Double.valueOf(mYahooOverviewQuote.Open)/100);
         double stockPriceChange = currentStockValue - purchasedStockTotal;
 
         mOpenTextView.setText("£" + mYahooOverviewQuote.Open);

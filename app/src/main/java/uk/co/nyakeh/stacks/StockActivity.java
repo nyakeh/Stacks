@@ -78,9 +78,9 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
         Call<YahooStockResponse> call = service.getStockHistory();
         call.enqueue(new Callback<YahooStockResponse>() {
             @Override
-            public void onResponse(Response<YahooStockResponse> response) {
+            public void onResponse(Call<YahooStockResponse> call, Response<YahooStockResponse> response) {
                 Log.d("StockActivity", "Status Code = " + response.code());
-                if (response.isSuccess()) {
+                if (response.isSuccessful()) {
                     Log.d("StockActivity", "response = " + new Gson().toJson(response.body()));
                     YahooStockResponse result = response.body();
                     mYahooStockQuery = result.query;
@@ -91,12 +91,12 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
                     }
                     updateUI();
                 } else {
-                    Log.d("error", response.toString());
+                    Log.d("error", response.raw().toString());
                 }
             }
 
             @Override
-            public void onFailure(Throwable t) {
+            public void onFailure(Call<YahooStockResponse> call, Throwable t) {
                 Log.d("StockActivity", "Status Code = " + t.getMessage());
             }
         });

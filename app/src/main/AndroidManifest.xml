@@ -25,7 +25,8 @@
         </activity>
         <activity
             android:name=".StockPurchaseActivity"
-            android:label="@string/title_activity_stock_purchase">
+            android:label="@string/title_activity_stock_purchase"
+            android:windowSoftInputMode="stateHidden">
         </activity>
     </application>
 
