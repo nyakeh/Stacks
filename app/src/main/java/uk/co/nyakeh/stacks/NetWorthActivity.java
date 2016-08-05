@@ -34,7 +34,7 @@ public class NetWorthActivity extends AppCompatActivity implements NavigationVie
 
         SparkView sparkView = (SparkView) findViewById(R.id.sparkView);
         float[] data = new float[] {2000,2200,2100,2500,2700,2500,2900,3000,2850};
-        adapter = new GraphAdapter(data);
+        adapter = new GraphAdapter(data, 2500);
         sparkView.setAdapter(adapter);
     }
 
