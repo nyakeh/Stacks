@@ -2,21 +2,19 @@ package uk.co.nyakeh.stacks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.robinhood.spark.SparkView;
 
 public class NetWorthActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private GraphAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +31,7 @@ public class NetWorthActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         SparkView sparkView = (SparkView) findViewById(R.id.sparkView);
-        float[] data = new float[] {2000,2200,2100,2500,2700,2500,2900,3000,2850};
+        float[] data = new float[]{2000, 2200, 2100, 2500, 2700, 2500, 2900, 3000, 2850};
         adapter = new GraphAdapter(data, 2500);
         sparkView.setAdapter(adapter);
     }
