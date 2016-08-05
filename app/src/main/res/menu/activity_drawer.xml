@@ -7,8 +7,12 @@
             android:icon="@drawable/ic_star"
             android:title="@string/home"/>
         <item
-            android:id="@+id/nav_stock"
+            android:id="@+id/nav_netWorth"
             android:icon="@drawable/ic_timeline"
+            android:title="@string/netWorth"/>
+        <item
+            android:id="@+id/nav_stock"
+            android:icon="@drawable/ic_menu_send"
             android:title="@string/stock"/>
         <item
             android:id="@+id/nav_purchaseHistory"

@@ -14,4 +14,6 @@
     <string name="home">Home</string>
     <string name="stock">Stock</string>
     <string name="purchase_history">Purchase History</string>
+    <string name="title_activity_net_worth">NetWorthActivity</string>
+    <string name="netWorth">Net Worth</string>
 </resources>

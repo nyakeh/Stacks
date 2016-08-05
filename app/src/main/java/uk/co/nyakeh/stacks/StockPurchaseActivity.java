@@ -43,15 +43,15 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_purchase);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.stock_purchase_toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stock_purchase_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.main_nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.stock_purchase_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         mSymbolField = (EditText) findViewById(R.id.newStockPurchase_symbol);
@@ -113,9 +113,12 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         } else if (id == R.id.nav_stock) {
             Intent intent = new Intent(this, StockActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_netWorth) {
+            Intent intent = new Intent(this, NetWorthActivity.class);
+            startActivity(intent);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stock_purchase_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

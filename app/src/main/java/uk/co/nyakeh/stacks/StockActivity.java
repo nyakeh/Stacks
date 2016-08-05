@@ -147,6 +147,9 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_purchaseHistory) {
             Intent intent = new Intent(this, StockPurchaseActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_netWorth) {
+            Intent intent = new Intent(this, NetWorthActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stock_drawer_layout);

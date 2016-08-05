@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="spark_SparkViewStyle">@style/MySparkViewStyle</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -22,4 +23,16 @@
 
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="MySparkViewStyle" parent="@style/spark_SparkView">
+        <item name="spark_lineColor">@color/colorPrimaryDark</item>
+        <!--<item name="spark_lineWidth">@dimen/line_width</item>-->
+        <!--<item name="spark_cornerRadius">@dimen/corner_radius</item>-->
+        <item name="spark_fill">false</item>
+        <!--<item name="spark_baseLineColor">@color/base_line_color</item>-->
+        <!--<item name="spark_baseLineWidth">@dimen/base_line_width</item>-->
+        <!--<item name="spark_scrubLineColor">@color/scrub_line_color</item>-->
+        <!--<item name="spark_scrubLineWidth">@dimen/scrub_line_width</item>-->
+        <item name="spark_scrubEnabled">false</item>
+        <item name="spark_animateChanges">true</item>
+    </style>
 </resources>
