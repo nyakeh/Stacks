@@ -32,7 +32,7 @@
         <!--<item name="spark_baseLineWidth">@dimen/base_line_width</item>-->
         <!--<item name="spark_scrubLineColor">@color/scrub_line_color</item>-->
         <!--<item name="spark_scrubLineWidth">@dimen/scrub_line_width</item>-->
-        <item name="spark_scrubEnabled">false</item>
+        <item name="spark_scrubEnabled">true</item>
         <item name="spark_animateChanges">true</item>
     </style>
 </resources>

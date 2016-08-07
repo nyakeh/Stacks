@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.robinhood.spark.SparkView;
 
@@ -30,10 +31,19 @@ public class NetWorthActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = (NavigationView) findViewById(R.id.net_worth_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        final TextView scrubInfoTextView = (TextView) findViewById(R.id.graph_header);
         SparkView sparkView = (SparkView) findViewById(R.id.sparkView);
         float[] data = new float[]{2000, 2200, 2100, 2500, 2700, 2500, 2900, 3000, 2850};
         adapter = new GraphAdapter(data, 2500);
         sparkView.setAdapter(adapter);
+        sparkView.setScrubListener(new SparkView.OnScrubListener() {
+            @Override
+            public void onScrubbed(Object value) {
+                if (value != null) {
+                    scrubInfoTextView.setText(getString(R.string.scrub_format, String.format("%,.2f", value)));
+                }
+            }
+        });
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
