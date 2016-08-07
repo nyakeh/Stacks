@@ -40,7 +40,7 @@ public class NetWorthActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onScrubbed(Object value) {
                 if (value != null) {
-                    scrubInfoTextView.setText(getString(R.string.scrub_format, String.format("%,.2f", value)));
+                    scrubInfoTextView.setText(getString(R.string.money_format, value));
                 }
             }
         });

@@ -16,5 +16,5 @@
     <string name="purchase_history">Purchase History</string>
     <string name="title_activity_net_worth">NetWorthActivity</string>
     <string name="netWorth">Net Worth</string>
-    <string name="scrub_format">£%1$s</string>
+    <string name="money_format">£%,.2f</string>
 </resources>

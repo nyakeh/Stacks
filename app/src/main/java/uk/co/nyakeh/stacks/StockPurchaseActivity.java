@@ -148,9 +148,9 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             mSymbolTextView.setText(mStockPurchase.Symbol);
             String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", mStockPurchase.DatePurchased).toString();
             mDatePurchasedTextView.setText(datePurchased);
-            mPriceTextView.setText(String.format("%.2f", mStockPurchase.Price));
+            mPriceTextView.setText(getString(R.string.money_format, mStockPurchase.Price));
             mQuantityTextView.setText(String.valueOf(mStockPurchase.Quantity));
-            mTotalTextView.setText(String.format("%.2f", mStockPurchase.Total));
+            mTotalTextView.setText(getString(R.string.money_format, mStockPurchase.Total));
         }
 
         @Override
