@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mChangeInPercentTextView.setText(mYahooOverviewQuote.ChangeinPercent);
 
         String cachedStockOpen = mSharedPreferences.getString(STOCK_PRICE_KEY, "");
-        if (mYahooOverviewQuote.Open == null && mYahooOverviewQuote.Open == "" && cachedStockOpen != "") {
+        if ((mYahooOverviewQuote.Open == null || mYahooOverviewQuote.Open == "") && cachedStockOpen != "") {
             mYahooOverviewQuote.Open = cachedStockOpen;
         }
 
