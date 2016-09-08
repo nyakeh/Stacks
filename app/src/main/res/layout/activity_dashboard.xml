@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
-    android:id="@+id/stock_purchase_drawer_layout"
+    android:id="@+id/dashboard_drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,12 +10,12 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_stock_purchase"
+        layout="@layout/app_bar_dashboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/stock_purchase_nav_view"
+        android:id="@+id/dashboard_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

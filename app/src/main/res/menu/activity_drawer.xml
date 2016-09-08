@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_star"
             android:title="@string/home"/>
         <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/dashboard"/>
+        <item
             android:id="@+id/nav_netWorth"
             android:icon="@drawable/ic_timeline"
             android:title="@string/netWorth"/>

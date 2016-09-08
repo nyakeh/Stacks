@@ -15,7 +15,7 @@
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:paddingBottom="64dp"
-        android:text="ca$h mon€y"
+        android:text="@string/netWorth_header"
         android:textSize="30sp"
         android:textStyle="bold"/>
 

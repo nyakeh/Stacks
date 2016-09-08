@@ -110,11 +110,14 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         if (id == R.id.nav_main) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_stock) {
-            Intent intent = new Intent(this, StockActivity.class);
+        } else if (id == R.id.nav_dashboard) {
+            Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_netWorth) {
             Intent intent = new Intent(this, NetWorthActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_stock) {
+            Intent intent = new Intent(this, StockActivity.class);
             startActivity(intent);
         }
 
