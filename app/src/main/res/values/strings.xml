@@ -18,7 +18,7 @@
     <string name="netWorth">Net Worth</string>
     <string name="money_format">£%,.2f</string>
     <string name="percentage_format">%.2f%%</string>
-    <string name="format_4dp">%,.4f</string>
+    <string name="percentage_fi">%,.4f%% fi</string>
     <string name="netWorth_header">ca$h mon€y</string>
     <string name="dashboard_header">GAIN$</string>
     <string name="dashboard">Dashboard</string>

@@ -83,7 +83,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 mDiff.setText(getString(R.string.money_format, diff));
                 mPercentageChange.setText(getString(R.string.percentage_format, percentageChange));
                 mPortfolio.setText(getString(R.string.money_format, portfolioSum));
-                mPercentageFI.setText(getString(R.string.format_4dp, percentageFI));
+                mPercentageFI.setText(getString(R.string.percentage_fi, percentageFI));
             } catch (JSONException exception) {
                 exception.printStackTrace();
             }

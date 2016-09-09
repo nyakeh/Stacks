@@ -123,15 +123,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             purchasedStockTotal += stockPurchase.Total;
             purchasedStockQuantity += stockPurchase.Quantity;
         }
-        double currentStockValue = purchasedStockQuantity * (Double.valueOf(mYahooOverviewQuote.Open)/100);
+        double currentStockValue = purchasedStockQuantity * Double.valueOf(mYahooOverviewQuote.Open);
         double stockPriceChange = currentStockValue - purchasedStockTotal;
 
         mOpenTextView.setText(getString(R.string.money_format, Double.valueOf(mYahooOverviewQuote.Open)));
         mStockPriceChangeTextView.setText(getString(R.string.money_format, stockPriceChange));
         mStockValuation.setText(getString(R.string.money_format, currentStockValue));
 
-        double dayValuationChange = currentStockValue * (Double.valueOf(mYahooOverviewQuote.ChangeinPercent.replace("%","")) / 100);
-        mStockDailyValuationChange.setText(getString(R.string.money_format, dayValuationChange));
+        Double dayPercentageChange = 1 + (Double.valueOf(mYahooOverviewQuote.ChangeinPercent.replace("%", "")) / 100);
+        double dayValuationChange = currentStockValue * (dayPercentageChange);
+        double dailyDiff = dayValuationChange - currentStockValue;
+        mStockDailyValuationChange.setText(getString(R.string.money_format, dailyDiff));
     }
 
     @Override
