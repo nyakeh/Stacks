@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        //getLatestStockData();
+        getLatestStockData();
     }
 
     private void getLatestStockData() {
