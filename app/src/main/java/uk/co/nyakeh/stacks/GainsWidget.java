@@ -66,9 +66,11 @@ public class GainsWidget extends AppWidgetProvider {
                 double purchaseSum = 3062.87;
                 double diff = portfolioSum - purchaseSum;
                 double percentageChange = (diff / purchaseSum) * 100;
-                CharSequence widgetText = String.format("↑ %.2f%%", percentageChange);
+                CharSequence formattedDiff = String.format("£%,.2f", diff);
+                CharSequence formattedPercentageChange = String.format("↑%.2f%%", percentageChange);
 
-                mViews.setTextViewText(R.id.gains_widget_text, widgetText);
+                mViews.setTextViewText(R.id.gains_widget_diff, formattedDiff);
+                mViews.setTextViewText(R.id.gains_widget_percentage, formattedPercentageChange);
                 mAppWidgetManager.updateAppWidget(mAppWidgetId, mViews);
             } catch (JSONException exception) {
                 exception.printStackTrace();

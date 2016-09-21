@@ -3,7 +3,7 @@
                     android:initialKeyguardLayout="@layout/gains_widget"
                     android:initialLayout="@layout/gains_widget"
                     android:minHeight="40dp"
-                    android:minWidth="110dp"
+                    android:minWidth="220dp"
                     android:previewImage="@drawable/gains_widget"
                     android:resizeMode="horizontal"
                     android:updatePeriodMillis="3600000"
