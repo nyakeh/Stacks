@@ -23,5 +23,4 @@
     <string name="dashboard_header">GAIN$</string>
     <string name="dashboard">Dashboard</string>
     <string name="appwidget_text">↑ %.2f%%</string>
-    <string name="add_widget">Add widget</string>
 </resources>
