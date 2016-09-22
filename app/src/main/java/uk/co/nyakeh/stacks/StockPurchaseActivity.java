@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,15 +31,17 @@ import java.util.regex.Pattern;
 import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
 
-public class StockPurchaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class StockPurchaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DateDialogCallbackInterface  {
     private RecyclerView mRecyclerView;
     private StockPurchaseAdapter mStockPurchaseAdapter;
     private EditText mSymbolField;
     private EditText mPriceField;
     private EditText mQuantityField;
     private EditText mFeeField;
+    private Button mStockPurchaseDateButton;
     private static final String WHOLE_NUMBER_REGEX = "(^[0-9]+)(?!.+)";
     private static final String MONEY_VALUE_REGEX = "(\\d*\\.\\d{1,2}|\\d+)$";
+    private Date mStockPurchaseDate = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,17 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         mPriceField = (EditText) findViewById(R.id.newStockPurchase_price);
         mQuantityField = (EditText) findViewById(R.id.newStockPurchase_quantity);
         mFeeField = (EditText) findViewById(R.id.newStockPurchase_fee);
+        mStockPurchaseDateButton = (Button) findViewById(R.id.stock_purchase_date);
+
+        mStockPurchaseDateButton.setText(DateFormat.format("EEEE, MMM dd, yyyy", mStockPurchaseDate).toString());
+        mStockPurchaseDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getSupportFragmentManager();
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mStockPurchaseDate);
+                dialog.show(manager, "DialogDate");
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +91,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
 
     private void addStockPurchase() {
         if (purchaseInputValid()){
-            StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), new Date(), Double.parseDouble(mPriceField.getText().toString()), Integer.parseInt(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
+            StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), mStockPurchaseDate, Double.parseDouble(mPriceField.getText().toString()), Integer.parseInt(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
             StockLab.get(this).addStockPurchase(stockPurchase);
             updateUI();
             Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Stock purchase stored", Snackbar.LENGTH_LONG).show();
@@ -103,7 +118,6 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -120,10 +134,15 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             Intent intent = new Intent(this, StockActivity.class);
             startActivity(intent);
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stock_purchase_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onDateSelectedCallBack(Date date) {
+        mStockPurchaseDate = date;
+        mStockPurchaseDateButton.setText(DateFormat.format("EEEE, MMM dd, yyyy", date).toString());
     }
 
     private class StockPurchaseHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {

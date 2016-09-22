@@ -45,6 +45,13 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="@string/fee"/>
+
+        <Button
+            android:id="@+id/stock_purchase_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/auxiliary_margin"
+            android:layout_marginRight="@dimen/auxiliary_margin"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

@@ -23,4 +23,6 @@
     <string name="dashboard_header">GAIN$</string>
     <string name="dashboard">Dashboard</string>
     <string name="appwidget_text">↑ %.2f%%</string>
+    <string name="ok">ok</string>
+    <string name="cancel">Cancel</string>
 </resources>
