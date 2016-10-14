@@ -27,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private TextView mPercentageChange;
     private TextView mPortfolio;
     private TextView mPercentageFI;
+    public static final int FI_TARGET = 420000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +75,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 JSONObject share = new JSONObject(result);
                 double sharePrice = Double.parseDouble(share.get("l").toString());
                 double portfolioSum = sharePrice * 112;
-                int fi_target = 420000;
                 double purchaseSum = 3062.87;
                 double diff = portfolioSum - purchaseSum;
-                double percentageChange = (diff / purchaseSum)*100;
-                double percentageFI = portfolioSum / fi_target;
+                double percentageChange = (diff / purchaseSum) * 100;
+                double percentageFI = (portfolioSum / FI_TARGET) * 100;
 
                 mDiff.setText(getString(R.string.money_format, diff));
                 mPercentageChange.setText(getString(R.string.percentage_format, percentageChange));
