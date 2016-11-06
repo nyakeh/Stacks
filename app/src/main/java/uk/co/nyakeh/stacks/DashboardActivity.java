@@ -16,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -25,11 +27,11 @@ import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
     private TextView mDiff;
     private TextView mPercentageChange;
     private TextView mPortfolio;
     private TextView mPercentageFI;
+    private TextView mDaysSinceInvestment;
     public static final int FI_TARGET = 420000;
 
     @Override
@@ -44,6 +46,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         mPercentageChange = (TextView) findViewById(R.id.dashboard_percentageChange);
         mPortfolio = (TextView) findViewById(R.id.dashboard_portfolio);
         mPercentageFI = (TextView) findViewById(R.id.dashboard_percentageFI);
+        mDaysSinceInvestment = (TextView) findViewById(R.id.dashboard_daysSinceInvestment);
         new WebClient().execute("http://finance.google.com/finance/info?client=ig&q=LON:VMID");
     }
 
@@ -70,10 +73,17 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             super.onPostExecute(result);
             double purchasedStockTotal = 0;
             int purchasedStockQuantity = 0;
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(1900, 01, 01);
+            Date latestInvestment = cal.getTime();
             List<StockPurchase> stockPurchaseHistory = StockLab.get(getParent()).getStockPurchaseHistory("VMID.L");
             for (StockPurchase stockPurchase : stockPurchaseHistory) {
                 purchasedStockTotal += stockPurchase.Total;
                 purchasedStockQuantity += stockPurchase.Quantity;
+                if (stockPurchase.DatePurchased.after(latestInvestment)) {
+                    latestInvestment = stockPurchase.DatePurchased;
+                }
             }
 
             try {
@@ -84,11 +94,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 double changeInValue = portfolioSum - purchaseSum;
                 double percentageChange = (changeInValue / purchaseSum) * 100;
                 double percentageFI = (portfolioSum / FI_TARGET) * 100;
-
                 mDiff.setText(getString(R.string.money_format, changeInValue));
                 mPercentageChange.setText(getString(R.string.percentage_format, percentageChange));
                 mPortfolio.setText(getString(R.string.money_format, portfolioSum));
                 mPercentageFI.setText(getString(R.string.percentage_fi, percentageFI));
+
+                long diff = new Date().getTime() - latestInvestment.getTime();
+                int daysSinceInvestment = (int) (diff / (24 * 60 * 60 * 1000));
+                mDaysSinceInvestment.setText(getString(R.string.days_format, daysSinceInvestment));
             } catch (JSONException exception) {
                 exception.printStackTrace();
             }
