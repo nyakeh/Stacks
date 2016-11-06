@@ -19,7 +19,7 @@ public class StockPurchaseCursorWrapper extends CursorWrapper {
         String id = getString(getColumnIndex(StockPurchaseTable.Cols.ID));
         String symbol = getString(getColumnIndex(StockPurchaseTable.Cols.SYMBOL));
         Long datePurchased = getLong(getColumnIndex(StockPurchaseTable.Cols.DATE_PURCHASED));
-        int price = getInt(getColumnIndex(StockPurchaseTable.Cols.PRICE));
+        double price = getDouble(getColumnIndex(StockPurchaseTable.Cols.PRICE));
         int quantity = getInt(getColumnIndex(StockPurchaseTable.Cols.QUANTITY));
         double fee = getDouble(getColumnIndex(StockPurchaseTable.Cols.FEE));
         double total = getDouble(getColumnIndex(StockPurchaseTable.Cols.TOTAL));
