@@ -16,10 +16,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import uk.co.nyakeh.stacks.database.StockLab;
+import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,12 +48,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     }
 
     public class WebClient extends AsyncTask<String, Integer, String> {
-        private OkHttpClient mOkHttpClient;
-
-        public WebClient() {
-            mOkHttpClient = new OkHttpClient();
-        }
-
         @Override
         protected String doInBackground(String... params) {
             String result = null;
@@ -60,7 +57,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                     .build();
 
             try {
-                Response response = mOkHttpClient.newCall(request).execute();
+                Response response = new OkHttpClient().newCall(request).execute();
                 result = response.body().string();
             } catch (IOException exception) {
                 exception.printStackTrace();
@@ -71,16 +68,24 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            double purchasedStockTotal = 0;
+            int purchasedStockQuantity = 0;
+            List<StockPurchase> stockPurchaseHistory = StockLab.get(getParent()).getStockPurchaseHistory("VMID.L");
+            for (StockPurchase stockPurchase : stockPurchaseHistory) {
+                purchasedStockTotal += stockPurchase.Total;
+                purchasedStockQuantity += stockPurchase.Quantity;
+            }
+
             try {
                 JSONObject share = new JSONObject(result);
                 double sharePrice = Double.parseDouble(share.get("l").toString());
-                double portfolioSum = sharePrice * 112;
-                double purchaseSum = 3062.87;
-                double diff = portfolioSum - purchaseSum;
-                double percentageChange = (diff / purchaseSum) * 100;
+                double portfolioSum = sharePrice * purchasedStockQuantity;
+                double purchaseSum = purchasedStockTotal;
+                double changeInValue = portfolioSum - purchaseSum;
+                double percentageChange = (changeInValue / purchaseSum) * 100;
                 double percentageFI = (portfolioSum / FI_TARGET) * 100;
 
-                mDiff.setText(getString(R.string.money_format, diff));
+                mDiff.setText(getString(R.string.money_format, changeInValue));
                 mPercentageChange.setText(getString(R.string.percentage_format, percentageChange));
                 mPortfolio.setText(getString(R.string.money_format, portfolioSum));
                 mPercentageFI.setText(getString(R.string.percentage_fi, percentageFI));
