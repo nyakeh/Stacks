@@ -32,6 +32,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private TextView mPortfolio;
     private TextView mPercentageFI;
     private TextView mDaysSinceInvestment;
+    private TextView mForecast;
     public static final int FI_TARGET = 420000;
 
     @Override
@@ -47,6 +48,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         mPortfolio = (TextView) findViewById(R.id.dashboard_portfolio);
         mPercentageFI = (TextView) findViewById(R.id.dashboard_percentageFI);
         mDaysSinceInvestment = (TextView) findViewById(R.id.dashboard_daysSinceInvestment);
+        mForecast = (TextView) findViewById(R.id.dashboard_forecast);
         new WebClient().execute("http://finance.google.com/finance/info?client=ig&q=LON:VMID");
     }
 
@@ -102,6 +104,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 long diff = new Date().getTime() - latestInvestment.getTime();
                 int daysSinceInvestment = (int) (diff / (24 * 60 * 60 * 1000));
                 mDaysSinceInvestment.setText(getString(R.string.days_format, daysSinceInvestment));
+
+                double tenYearForecast = (Math.pow((1.0041),(10*12))* portfolioSum);
+                mForecast.setText(getString(R.string.money_format, tenYearForecast));
             } catch (JSONException exception) {
                 exception.printStackTrace();
             }
