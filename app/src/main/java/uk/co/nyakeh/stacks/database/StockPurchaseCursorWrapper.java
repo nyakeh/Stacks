@@ -10,7 +10,6 @@ import uk.co.nyakeh.stacks.objects.StockPurchase;
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
 
 public class StockPurchaseCursorWrapper extends CursorWrapper {
-
     public StockPurchaseCursorWrapper(Cursor cursor) {
         super(cursor);
     }
@@ -24,7 +23,7 @@ public class StockPurchaseCursorWrapper extends CursorWrapper {
         double fee = getDouble(getColumnIndex(StockPurchaseTable.Cols.FEE));
         double total = getDouble(getColumnIndex(StockPurchaseTable.Cols.TOTAL));
 
-        StockPurchase stockPurchase = new StockPurchase(UUID.fromString(id),symbol,new Date(datePurchased), price, quantity, fee, total);
+        StockPurchase stockPurchase = new StockPurchase(UUID.fromString(id), symbol,new Date(datePurchased), price, quantity, fee, total);
         return stockPurchase;
     }
 }

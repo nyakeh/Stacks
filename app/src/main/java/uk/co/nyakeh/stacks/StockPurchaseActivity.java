@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -112,6 +113,9 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         if (mStockPurchaseAdapter == null) {
             mStockPurchaseAdapter = new StockPurchaseAdapter(stockPurchaseHistory);
             mRecyclerView.setAdapter(mStockPurchaseAdapter);
+            ItemTouchHelper.Callback callback = new SwipeCallback(mStockPurchaseAdapter);
+            ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+            touchHelper.attachToRecyclerView(mRecyclerView);
         } else {
             mStockPurchaseAdapter.setStockPurchases(stockPurchaseHistory);
             mStockPurchaseAdapter.notifyDataSetChanged();
@@ -142,14 +146,13 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         mStockPurchaseDateButton.setText(DateFormat.format("EEEE, MMM dd, yyyy", date).toString());
     }
 
-    private class StockPurchaseHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+    private class StockPurchaseHolder extends RecyclerView.ViewHolder  {
         private StockPurchase mStockPurchase;
         private TextView mSymbolTextView;
         private TextView mDatePurchasedTextView;
         private TextView mPriceTextView;
         private TextView mQuantityTextView;
         private TextView mTotalTextView;
-        private ImageButton mDeleteButton;
 
         public StockPurchaseHolder(View itemView) {
             super(itemView);
@@ -158,8 +161,6 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_price);
             mQuantityTextView = (TextView) itemView.findViewById(R.id.list_item_quantity);
             mTotalTextView = (TextView) itemView.findViewById(R.id.list_item_total);
-            mDeleteButton = (ImageButton) itemView.findViewById(R.id.list_item_delete);
-            mDeleteButton.setOnClickListener(this);
         }
 
         private void bindStockPurchase(StockPurchase stockPurchase) {
@@ -171,15 +172,9 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             mQuantityTextView.setText(String.valueOf(mStockPurchase.Quantity));
             mTotalTextView.setText(getString(R.string.money_format, mStockPurchase.Total));
         }
-
-        @Override
-        public void onClick(View view) {
-            StockLab.get(getParent()).deleteStockPurchase(mStockPurchase.Id);
-            updateUI();
-        }
     }
 
-    private class StockPurchaseAdapter extends RecyclerView.Adapter<StockPurchaseHolder> {
+    private class StockPurchaseAdapter extends RecyclerView.Adapter<StockPurchaseHolder> implements ISwipeAdapter {
         private List<StockPurchase> mStockPurchases;
 
         public StockPurchaseAdapter(List<StockPurchase> stockPurchases) {
@@ -206,6 +201,13 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
 
         public void setStockPurchases(List<StockPurchase> stockPurchases) {
             mStockPurchases = stockPurchases;
+        }
+
+        @Override
+        public void Delete(int position) {
+            StockPurchase stock = mStockPurchases.remove(position);
+            StockLab.get(getParent()).deleteStockPurchase(stock.Id);
+            notifyItemRemoved(position);
         }
     }
 }

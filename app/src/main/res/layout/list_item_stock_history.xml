@@ -109,20 +109,11 @@
             android:padding="2dp"
             android:textStyle="bold"
             tools:text="994.41"/>
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:gravity="right">
-
-            <ImageButton
-                android:id="@+id/list_item_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_delete"
-                android:tint="@color/colorAccent"
-                android:background="@color/cardview_light_background"/>
-
-        </RelativeLayout>
+            android:gravity="right" />
     </LinearLayout>
 </LinearLayout>
