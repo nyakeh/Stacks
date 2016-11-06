@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -42,7 +41,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     private Button mStockPurchaseDateButton;
     private static final String WHOLE_NUMBER_REGEX = "(^[0-9]+)(?!.+)";
     private static final String MONEY_VALUE_REGEX = "^(\\d*\\.\\d{1,2}|\\d+)$";
-    private static final String DECIMAL_VALUE_REGEX = "^(\\d*\\.\\d{1,3}|\\d+)$";
+    private static final String THREE_DECIMAL_PLACES_REGEX = "^(\\d*\\.\\d{1,3}|\\d+)$";
     private Date mStockPurchaseDate = new Date();
 
     @Override
@@ -101,7 +100,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     }
 
     private boolean purchaseInputValid() {
-        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(DECIMAL_VALUE_REGEX, mPriceField.getText().toString()) || !Pattern.matches(WHOLE_NUMBER_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
+        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(THREE_DECIMAL_PLACES_REGEX, mPriceField.getText().toString()) || !Pattern.matches(WHOLE_NUMBER_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
             Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
             return false;
         }
@@ -169,7 +168,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             mSymbolTextView.setText(mStockPurchase.Symbol);
             String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", mStockPurchase.DatePurchased).toString();
             mDatePurchasedTextView.setText(datePurchased);
-            mPriceTextView.setText(getString(R.string.decimal_format, mStockPurchase.Price));
+            mPriceTextView.setText(getString(R.string.threeDecimalPlaces_format, mStockPurchase.Price));
             mQuantityTextView.setText(String.valueOf(mStockPurchase.Quantity));
             mTotalTextView.setText(getString(R.string.money_format, mStockPurchase.Total));
         }

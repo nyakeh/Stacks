@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,7 +40,6 @@ public class StockLab {
     public List<StockPurchase> getStockPurchaseHistory(String stockSymbol) {
         ArrayList<StockPurchase> stockPurchases = new ArrayList<>();
         StockPurchaseCursorWrapper cursor = queryStockPurchases(StockPurchaseTable.Cols.SYMBOL + " = ?", new String[]{stockSymbol});
-
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -49,6 +50,12 @@ public class StockLab {
         } finally {
             cursor.close();
         }
+        Collections.sort(stockPurchases, new Comparator<StockPurchase>() {
+            @Override
+            public int compare(StockPurchase purchase1, StockPurchase purchase2) {
+                return purchase1.DatePurchased.compareTo(purchase2.DatePurchased);
+            }
+        });
         return stockPurchases;
     }
 
