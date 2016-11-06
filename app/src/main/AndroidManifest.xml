@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="uk.co.nyakeh.stacks"
-          xmlns:android="http://schemas.android.com/apk/res/android">
-
+<manifest package="uk.co.nyakeh.stacks" xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -29,14 +27,9 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
-            android:name=".NetWorthActivity"
-            android:label="">
-        </activity>
-        <activity
             android:name=".DashboardActivity"
             android:label="">
         </activity>
-
         <receiver android:name=".GainsWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
@@ -47,5 +40,4 @@
                 android:resource="@xml/gains_widget_info"/>
         </receiver>
     </application>
-
 </manifest>

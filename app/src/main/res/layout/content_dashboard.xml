@@ -20,7 +20,7 @@
         android:textStyle="bold"/>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/dashboard_diff_card"
+        android:id="@+id/netWorth_current_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dashboard_header"
@@ -46,7 +46,7 @@
         android:id="@+id/dashboard_percentageChange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dashboard_diff_card"
+        android:layout_below="@+id/netWorth_current_card"
         android:gravity="center"
         android:textColor="@color/colorAccent"
         android:textSize="30sp"
