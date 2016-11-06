@@ -41,7 +41,8 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     private EditText mFeeField;
     private Button mStockPurchaseDateButton;
     private static final String WHOLE_NUMBER_REGEX = "(^[0-9]+)(?!.+)";
-    private static final String MONEY_VALUE_REGEX = "(\\d*\\.\\d{1,2}|\\d+)$";
+    private static final String MONEY_VALUE_REGEX = "^(\\d*\\.\\d{1,2}|\\d+)$";
+    private static final String DECIMAL_VALUE_REGEX = "^(\\d*\\.\\d{1,3}|\\d+)$";
     private Date mStockPurchaseDate = new Date();
 
     @Override
@@ -100,7 +101,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     }
 
     private boolean purchaseInputValid() {
-        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(MONEY_VALUE_REGEX, mPriceField.getText().toString()) || !Pattern.matches(WHOLE_NUMBER_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
+        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(DECIMAL_VALUE_REGEX, mPriceField.getText().toString()) || !Pattern.matches(WHOLE_NUMBER_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
             Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
             return false;
         }
@@ -168,7 +169,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             mSymbolTextView.setText(mStockPurchase.Symbol);
             String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", mStockPurchase.DatePurchased).toString();
             mDatePurchasedTextView.setText(datePurchased);
-            mPriceTextView.setText(getString(R.string.money_format, mStockPurchase.Price));
+            mPriceTextView.setText(getString(R.string.decimal_format, mStockPurchase.Price));
             mQuantityTextView.setText(String.valueOf(mStockPurchase.Quantity));
             mTotalTextView.setText(getString(R.string.money_format, mStockPurchase.Total));
         }

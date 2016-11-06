@@ -16,6 +16,7 @@
     <string name="title_activity_net_worth">NetWorthActivity</string>
     <string name="netWorth">Net Worth</string>
     <string name="money_format">£%,.2f</string>
+    <string name="decimal_format">£%,.3f</string>
     <string name="percentage_format">%.2f%%</string>
     <string name="percentage_fi">%,.4f%% fi</string>
     <string name="days_format">%d days</string>
