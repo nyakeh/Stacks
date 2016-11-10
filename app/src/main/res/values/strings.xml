@@ -19,6 +19,7 @@
     <string name="threeDecimalPlaces_format">£%,.3f</string>
     <string name="percentage_format">%.2f%%</string>
     <string name="percentage_fi">%,.4f%% fi</string>
+    <string name="percentage_string_format">%s%%</string>
     <string name="days_format">%d days</string>
     <string name="dashboard_header">GAIN$</string>
     <string name="dashboard">Dashboard</string>
