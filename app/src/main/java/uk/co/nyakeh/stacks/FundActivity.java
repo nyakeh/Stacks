@@ -39,13 +39,14 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
         _vmidChange = (TextView) findViewById(R.id.fund_vmidChange);
         _vwrlPrice = (TextView) findViewById(R.id.fund_vwrlPrice);
         _vwrlChange = (TextView) findViewById(R.id.fund_vwrlChange);
-        new GoogleFinanceClient(this).execute();
+        new GoogleFinanceClient(this).execute("LON:VMID");
+        new GoogleFinanceClient(this).execute("LON:VWRL");
     }
 
     public void PostExecute(String result) {
         try {
             JSONObject share = new JSONObject(result);
-`            double price = Double.parseDouble(share.get("l").toString());
+            double price = Double.parseDouble(share.get("l").toString());
             String change = share.get("c").toString();
             String symbol = share.get("t").toString();
             switch (symbol){

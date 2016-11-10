@@ -18,8 +18,9 @@ public class GoogleFinanceClient extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... params) {
         String result = "";
+        String share = params[0];
         Request request = new Request.Builder()
-                .url("http://finance.google.com/finance/info?client=ig&q=LON:VMID")
+                .url("http://finance.google.com/finance/info?client=ig&q=" + share)
                 .build();
         try {
             Response response = new OkHttpClient().newCall(request).execute();
