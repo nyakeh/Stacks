@@ -26,6 +26,8 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
     private TextView _vmidChange;
     private TextView _vwrlPrice;
     private TextView _vwrlChange;
+    private TextView _vukePrice;
+    private TextView _vukeChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,11 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
         _vmidChange = (TextView) findViewById(R.id.fund_vmidChange);
         _vwrlPrice = (TextView) findViewById(R.id.fund_vwrlPrice);
         _vwrlChange = (TextView) findViewById(R.id.fund_vwrlChange);
+        _vukePrice = (TextView) findViewById(R.id.fund_vukePrice);
+        _vukeChange = (TextView) findViewById(R.id.fund_vukeChange);
         new GoogleFinanceClient(this).execute("LON:VMID");
         new GoogleFinanceClient(this).execute("LON:VWRL");
+        new GoogleFinanceClient(this).execute("LON:VUKE");
     }
 
     public void PostExecute(String result) {
@@ -58,6 +63,10 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
                     _vwrlPrice.setText(getString(R.string.money_format, price));
                     _vwrlChange.setText(change);
                     break;
+                case "VUKE":
+                    _vukePrice.setText(getString(R.string.money_format, price));
+                    _vukeChange.setText(change);
+                    break;
             }
         } catch (JSONException exception) {
             exception.printStackTrace();
@@ -69,7 +78,6 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.fund_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
