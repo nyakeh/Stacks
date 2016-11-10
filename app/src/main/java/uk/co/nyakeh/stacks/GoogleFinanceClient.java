@@ -1,0 +1,39 @@
+package uk.co.nyakeh.stacks;
+
+import android.os.AsyncTask;
+
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class GoogleFinanceClient extends AsyncTask<String, Integer, String> {
+    private DashboardActivity _activity;
+
+    public GoogleFinanceClient(DashboardActivity activity) {
+        _activity = activity;
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        String result = "";
+        String url = params[0];
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        try {
+            Response response = new OkHttpClient().newCall(request).execute();
+            result = response.body().string();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        _activity.PostExecute(result);
+    }
+}
