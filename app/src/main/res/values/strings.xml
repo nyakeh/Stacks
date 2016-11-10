@@ -25,4 +25,6 @@
     <string name="appwidget_text">↑ %.2f%%</string>
     <string name="ok">ok</string>
     <string name="cancel">Cancel</string>
+    <string name="funds">Funds</string>
+    <string name="fund_header">Watchlist</string>
 </resources>

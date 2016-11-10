@@ -155,17 +155,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_stock) {
-            Intent intent = new Intent(this, StockActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_dashboard) {
+        if (id == R.id.nav_dashboard) {
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_purchaseHistory) {
+        } else if (id == R.id.nav_fund) {
+            Intent intent = new Intent(this, FundActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_stock) {
+            Intent intent = new Intent(this, StockActivity.class);
+            startActivity(intent);
+        }  else if (id == R.id.nav_purchaseHistory) {
             Intent intent = new Intent(this, StockPurchaseActivity.class);
             startActivity(intent);
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

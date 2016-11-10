@@ -11,6 +11,10 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/dashboard"/>
         <item
+            android:id="@+id/nav_fund"
+            android:icon="@drawable/ic_timeline"
+            android:title="@string/funds"/>
+        <item
             android:id="@+id/nav_stock"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/stock"/>

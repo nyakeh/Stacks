@@ -21,7 +21,7 @@ import java.util.List;
 import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
 
-public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IAsyncTask {
     private TextView mDiff;
     private TextView mPercentageChange;
     private TextView mPortfolio;
@@ -103,11 +103,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         if (id == R.id.nav_main) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_purchaseHistory) {
-            Intent intent = new Intent(this, StockPurchaseActivity.class);
+        } else if (id == R.id.nav_fund) {
+            Intent intent = new Intent(this, FundActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_stock) {
             Intent intent = new Intent(this, StockActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_purchaseHistory) {
+            Intent intent = new Intent(this, StockPurchaseActivity.class);
             startActivity(intent);
         }
 

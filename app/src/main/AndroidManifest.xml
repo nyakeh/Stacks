@@ -30,6 +30,10 @@
             android:name=".DashboardActivity"
             android:label="">
         </activity>
+        <activity
+            android:name=".FundActivity"
+            android:label="">
+        </activity>
         <receiver android:name=".GainsWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>

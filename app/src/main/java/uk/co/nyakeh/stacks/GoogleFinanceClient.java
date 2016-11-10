@@ -9,9 +9,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GoogleFinanceClient extends AsyncTask<String, Integer, String> {
-    private DashboardActivity _activity;
+    private IAsyncTask _activity;
 
-    public GoogleFinanceClient(DashboardActivity activity) {
+    public GoogleFinanceClient(IAsyncTask activity) {
         _activity = activity;
     }
 
