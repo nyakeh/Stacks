@@ -45,12 +45,19 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
     public void PostExecute(String result) {
         try {
             JSONObject share = new JSONObject(result);
-            double vwrlPrice = Double.parseDouble(share.get("l").toString());
-            String vwrlChange = share.get("c").toString();
-            _vmidPrice.setText(getString(R.string.money_format, vwrlPrice));
-            _vmidChange.setText(vwrlChange);
-            _vwrlPrice.setText(getString(R.string.money_format, vwrlPrice));
-            _vwrlChange.setText(vwrlChange);
+`            double price = Double.parseDouble(share.get("l").toString());
+            String change = share.get("c").toString();
+            String symbol = share.get("t").toString();
+            switch (symbol){
+                case "VMID":
+                    _vmidPrice.setText(getString(R.string.money_format, price));
+                    _vmidChange.setText(change);
+                    break;
+                case "VWRL":
+                    _vwrlPrice.setText(getString(R.string.money_format, price));
+                    _vwrlChange.setText(change);
+                    break;
+            }
         } catch (JSONException exception) {
             exception.printStackTrace();
         }
