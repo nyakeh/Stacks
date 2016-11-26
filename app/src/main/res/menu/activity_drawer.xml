@@ -8,15 +8,15 @@
             android:title="@string/home"/>
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_money"
             android:title="@string/dashboard"/>
         <item
             android:id="@+id/nav_fund"
-            android:icon="@drawable/ic_timeline"
+            android:icon="@drawable/ic_business"
             android:title="@string/funds"/>
         <item
             android:id="@+id/nav_stock"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_timeline"
             android:title="@string/stock"/>
         <item
             android:id="@+id/nav_purchaseHistory"
