@@ -1,6 +1,5 @@
 package uk.co.nyakeh.stacks;
 
 public interface IAsyncTask {
-
-    void PostExecute(String result);
+    void PostExecute(String response);
 }

@@ -48,9 +48,9 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
         new GoogleFinanceClient(this).execute("LON:VUKE");
     }
 
-    public void PostExecute(String result) {
+    public void PostExecute(String response) {
         try {
-            JSONObject share = new JSONObject(result);
+            JSONObject share = new JSONObject(response);
             double price = Double.parseDouble(share.get("l").toString());
             String change = share.get("cp").toString();
             String symbol = share.get("t").toString();

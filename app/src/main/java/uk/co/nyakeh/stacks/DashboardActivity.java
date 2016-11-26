@@ -47,14 +47,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         new GoogleFinanceClient(this).execute("LON:VMID");
     }
 
-    public void PostExecute(String result) {
+    public void PostExecute(String response) {
         double purchasedStockTotal = 0;
         int purchasedStockQuantity = 0;
 
         Calendar cal = Calendar.getInstance();
         cal.set(1900, 01, 01);
         Date latestInvestment = cal.getTime();
-        List<StockPurchase> stockPurchaseHistory = StockLab.get(getParent()).getStockPurchaseHistory("VMID.L");
+        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
         for (StockPurchase stockPurchase : stockPurchaseHistory) {
             purchasedStockTotal += stockPurchase.Total;
             purchasedStockQuantity += stockPurchase.Quantity;
@@ -64,7 +64,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
 
         try {
-            JSONObject share = new JSONObject(result);
+            JSONObject share = new JSONObject(response);
             double sharePrice = Double.parseDouble(share.get("l").toString());
             double portfolioSum = sharePrice * purchasedStockQuantity;
             double purchaseSum = purchasedStockTotal;

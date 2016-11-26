@@ -9,6 +9,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GoogleFinanceClient extends AsyncTask<String, Integer, String> {
+    public static final String GOOGLE_FINANCE_URL = "http://finance.google.com/finance/info?client=ig&q=";
     private IAsyncTask _activity;
 
     public GoogleFinanceClient(IAsyncTask activity) {
@@ -20,7 +21,7 @@ public class GoogleFinanceClient extends AsyncTask<String, Integer, String> {
         String result = "";
         String share = params[0];
         Request request = new Request.Builder()
-                .url("http://finance.google.com/finance/info?client=ig&q=" + share)
+                .url(GOOGLE_FINANCE_URL + share)
                 .build();
         try {
             Response response = new OkHttpClient().newCall(request).execute();
