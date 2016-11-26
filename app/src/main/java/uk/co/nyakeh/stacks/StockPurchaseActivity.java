@@ -150,7 +150,6 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     }
 
     private class StockPurchaseHolder extends RecyclerView.ViewHolder  {
-        private StockPurchase mStockPurchase;
         private TextView mSymbolTextView;
         private TextView mDatePurchasedTextView;
         private TextView mPriceTextView;
@@ -167,13 +166,12 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         }
 
         private void bindStockPurchase(StockPurchase stockPurchase) {
-            mStockPurchase = stockPurchase;
-            mSymbolTextView.setText(mStockPurchase.Symbol);
-            String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", mStockPurchase.DatePurchased).toString();
+            mSymbolTextView.setText(stockPurchase.Symbol);
+            String datePurchased = DateFormat.format("EEEE, MMM dd, yyyy", stockPurchase.DatePurchased).toString();
             mDatePurchasedTextView.setText(datePurchased);
-            mPriceTextView.setText(getString(R.string.threeDecimalPlaces_format, mStockPurchase.Price));
-            mQuantityTextView.setText(String.valueOf(mStockPurchase.Quantity));
-            mTotalTextView.setText(getString(R.string.money_format, mStockPurchase.Total));
+            mPriceTextView.setText(getString(R.string.threeDecimalPlaces_format, stockPurchase.Price));
+            mQuantityTextView.setText(String.valueOf(stockPurchase.Quantity));
+            mTotalTextView.setText(getString(R.string.money_format, stockPurchase.Total));
         }
     }
 
