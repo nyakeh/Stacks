@@ -206,9 +206,23 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
 
         @Override
         public void Delete(int position) {
-            StockPurchase stock = mStockPurchases.remove(position);
+            final StockPurchase stock = mStockPurchases.remove(position);
             StockLab.get(getParent()).deleteStockPurchase(stock.Id);
             notifyItemRemoved(position);
+            Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Purchase deleted", Snackbar.LENGTH_LONG)
+                    .setAction("Undo", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            StockLab.get(getParent()).addStockPurchase(stock);
+                            Add(stock);
+                        }
+                    })
+                    .show();
+        }
+
+        private void Add(StockPurchase stockPurchase){
+            mStockPurchases.add(stockPurchase);
+            notifyItemInserted(mStockPurchases.size());
         }
     }
 }
