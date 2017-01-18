@@ -42,7 +42,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         mPortfolio = (TextView) findViewById(R.id.dashboard_portfolio);
         mPercentageFI = (TextView) findViewById(R.id.dashboard_percentageFI);
         mDaysSinceInvestment = (TextView) findViewById(R.id.dashboard_daysSinceInvestment);
-        new GoogleFinanceClient(this).execute("LON:VMID");
+        new GoogleFinanceClient(this, this).execute("LON:VMID");
     }
 
     public void PostExecute(String response) {

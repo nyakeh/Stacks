@@ -43,9 +43,9 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
         _vwrlChange = (TextView) findViewById(R.id.fund_vwrlChange);
         _vukePrice = (TextView) findViewById(R.id.fund_vukePrice);
         _vukeChange = (TextView) findViewById(R.id.fund_vukeChange);
-        new GoogleFinanceClient(this).execute("LON:VMID");
-        new GoogleFinanceClient(this).execute("LON:VWRL");
-        new GoogleFinanceClient(this).execute("LON:VUKE");
+        new GoogleFinanceClient(this, this).execute("LON:VMID");
+        new GoogleFinanceClient(this, this).execute("LON:VWRL");
+        new GoogleFinanceClient(this, this).execute("LON:VUKE");
     }
 
     public void PostExecute(String response) {

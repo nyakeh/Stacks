@@ -29,7 +29,7 @@ public class GainsWidget extends AppWidgetProvider implements IAsyncTask {
         _context = context;
         _appWidgetManager = appWidgetManager;
         _appWidgetId = appWidgetId;
-        new GoogleFinanceClient(this).execute("LON:VMID");
+        new GoogleFinanceClient(this, context).execute("LON:VMID");
     }
 
     @Override
