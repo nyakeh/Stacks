@@ -131,6 +131,9 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         } else if (id == R.id.nav_fund) {
             Intent intent = new Intent(this, FundActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_controlPanel) {
+            Intent intent = new Intent(this, ControlPanelActivity.class);
+            startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stock_purchase_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

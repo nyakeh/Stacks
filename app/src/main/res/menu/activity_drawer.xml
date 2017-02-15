@@ -14,6 +14,10 @@
             android:id="@+id/nav_purchaseHistory"
             android:icon="@drawable/ic_calendar"
             android:title="@string/purchase_history"/>
+        <item
+            android:id="@+id/nav_controlPanel"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/control_panel"/>
     </group>
 
 </menu>

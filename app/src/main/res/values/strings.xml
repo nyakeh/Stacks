@@ -24,4 +24,5 @@
     <string name="cancel">Cancel</string>
     <string name="funds">Funds</string>
     <string name="fund_header">Watchlist</string>
+    <string name="control_panel">Control Panel</string>
 </resources>

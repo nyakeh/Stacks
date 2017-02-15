@@ -1,5 +1,6 @@
 package uk.co.nyakeh.stacks;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -90,6 +91,9 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         } else if (id == R.id.nav_purchaseHistory) {
             Intent intent = new Intent(this, StockPurchaseActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_controlPanel) {
+            Intent intent = new Intent(this, ControlPanelActivity.class);
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.fund_drawer_layout);

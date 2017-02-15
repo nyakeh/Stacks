@@ -25,6 +25,10 @@
             android:name=".FundActivity"
             android:label="">
         </activity>
+        <activity
+            android:name=".ControlPanelActivity"
+            android:label="@string/control_panel">
+        </activity>
         <receiver android:name=".GainsWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
