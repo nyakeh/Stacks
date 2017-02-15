@@ -1,6 +1,5 @@
 package uk.co.nyakeh.stacks;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,13 +13,6 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import uk.co.nyakeh.stacks.database.StockLab;
-import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class FundActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IAsyncTask {
     private TextView _vmidPrice;

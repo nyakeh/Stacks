@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import uk.co.nyakeh.stacks.database.StockLab;
-import uk.co.nyakeh.stacks.objects.StockPurchase;
+import uk.co.nyakeh.stacks.records.StockPurchase;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IAsyncTask {
     private TextView mDiff;

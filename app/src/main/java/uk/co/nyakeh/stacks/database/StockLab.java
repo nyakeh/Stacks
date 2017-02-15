@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
-import uk.co.nyakeh.stacks.objects.StockPurchase;
+import uk.co.nyakeh.stacks.records.Metadata;
+import uk.co.nyakeh.stacks.records.StockPurchase;
 
 public class StockLab {
     private static StockLab sStockLab;
@@ -63,6 +64,18 @@ public class StockLab {
         mDatabase.delete(StockPurchaseTable.NAME, StockPurchaseTable.Cols.ID + " = ?", new String[]{id.toString()});
     }
 
+    public Metadata getMetadata() {
+        Metadata metadata = null;
+        MetadataCursorWrapper cursor = queryMetadata();
+        try {
+            cursor.moveToFirst();
+            metadata = cursor.getMetadata();
+        } finally {
+            cursor.close();
+        }
+        return metadata;
+    }
+
     private StockPurchaseCursorWrapper queryStockPurchases(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(StockPurchaseTable.NAME,
                 null,  // Columns - null selects *
@@ -73,6 +86,18 @@ public class StockLab {
                 null); // orderBy
 
         return new StockPurchaseCursorWrapper(cursor);
+    }
+
+    private MetadataCursorWrapper queryMetadata() {
+        Cursor cursor = mDatabase.query(MetadataDbSchema.MetadataTable.NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        return new MetadataCursorWrapper(cursor);
     }
 
     private ContentValues getStockPurchaseContentValues(StockPurchase stockPurchase) {
@@ -86,5 +111,4 @@ public class StockLab {
         values.put(StockPurchaseTable.Cols.TOTAL, stockPurchase.Total);
         return values;
     }
-
 }

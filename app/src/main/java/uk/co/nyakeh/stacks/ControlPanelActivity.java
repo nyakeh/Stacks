@@ -9,12 +9,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import uk.co.nyakeh.stacks.database.StockLab;
+import uk.co.nyakeh.stacks.records.Metadata;
 
 public class ControlPanelActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private EditText _yearlyExpenses;
+    private EditText _safeWithdrawalRate;
+    private TextView _financialIndependenceNumber;
+    private EditText _fundsWatchlist;
+    private EditText _stockExchangePrefix;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,19 @@ public class ControlPanelActivity extends AppCompatActivity implements Navigatio
         Toolbar toolbar = (Toolbar) findViewById(R.id.controlPanel_toolbar);
         setSupportActionBar(toolbar);
         SetupNavigation(toolbar);
+
+        Metadata metadata = StockLab.get(this).getMetadata();
+        _yearlyExpenses = (EditText) findViewById(R.id.metadata_yearlyExpenses);
+        _safeWithdrawalRate = (EditText) findViewById(R.id.metadata_safeWithdrawalRate);
+        _financialIndependenceNumber = (TextView) findViewById(R.id.metadata_financialIndependenceNumber);
+        _fundsWatchlist = (EditText) findViewById(R.id.metadata_fundsWatchlist);
+        _stockExchangePrefix = (EditText) findViewById(R.id.metadata_stockExchangePrefix);
+
+        _yearlyExpenses.setText(String.valueOf(metadata.YearlyExpenses));
+        _safeWithdrawalRate.setText(String.valueOf(metadata.SafeWithdrawalRate));
+        _financialIndependenceNumber.setText(String.valueOf(metadata.FinancialIndependenceNumber));
+        _fundsWatchlist.setText(metadata.FundsWatchlist);
+        _stockExchangePrefix.setText(metadata.StockExchangePrefix);
     }
 
     private void SetupNavigation(Toolbar toolbar) {

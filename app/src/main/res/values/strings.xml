@@ -25,4 +25,8 @@
     <string name="funds">Funds</string>
     <string name="fund_header">Watchlist</string>
     <string name="control_panel">Control Panel</string>
+    <string name="yearly_expenses">Yearly Expenses</string>
+    <string name="safe_withdrawal_rate">Safe Withdrawal Rate</string>
+    <string name="funds_watchlist">Funds Watchlist</string>
+    <string name="stock_exchange_prefix">Stock Exchange Prefix</string>
 </resources>

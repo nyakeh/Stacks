@@ -11,18 +11,73 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/auxiliary_margin"
+        android:layout_marginRight="@dimen/auxiliary_margin"
+        android:layout_marginTop="@dimen/auxiliary_margin">
 
-        <TextView
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_yearlyExpenses"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/colorPrimary"/>
+            android:layout_height="wrap_content">
 
+            <EditText
+                android:id="@+id/metadata_yearlyExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/yearly_expenses"
+                android:inputType="numberDecimal"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <TextView
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_safeWithdrawalRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="safasdfasgfsdgag"/>
+            android:layout_below="@+id/layout_yearlyExpenses">
+
+            <EditText
+                android:id="@+id/metadata_safeWithdrawalRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/safe_withdrawal_rate"
+                android:inputType="numberDecimal"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/metadata_financialIndependenceNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_safeWithdrawalRate"
+            android:layout_marginTop="@dimen/auxiliary_margin"
+            tools:text="£1,000,000"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_fundsWatchlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/metadata_financialIndependenceNumber">
+
+            <EditText
+                android:id="@+id/metadata_fundsWatchlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/funds_watchlist"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/layout_stockExchangePrefix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_fundsWatchlist">
+
+            <EditText
+                android:id="@+id/metadata_stockExchangePrefix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/stock_exchange_prefix"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
 
     </RelativeLayout>
 </ScrollView>

@@ -1,4 +1,4 @@
-package uk.co.nyakeh.stacks.objects;
+package uk.co.nyakeh.stacks.records;
 
 import java.util.Date;
 import java.util.UUID;
