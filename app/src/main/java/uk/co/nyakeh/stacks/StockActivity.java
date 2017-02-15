@@ -129,10 +129,7 @@ public class StockActivity extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_main) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_dashboard) {
+        if (id == R.id.nav_dashboard) {
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_fund) {

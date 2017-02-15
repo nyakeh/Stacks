@@ -95,10 +95,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_main) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_fund) {
+        if (id == R.id.nav_fund) {
             Intent intent = new Intent(this, FundActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_stock) {
