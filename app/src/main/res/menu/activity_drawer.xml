@@ -11,10 +11,6 @@
             android:icon="@drawable/ic_business"
             android:title="@string/funds"/>
         <item
-            android:id="@+id/nav_stock"
-            android:icon="@drawable/ic_timeline"
-            android:title="@string/stock"/>
-        <item
             android:id="@+id/nav_purchaseHistory"
             android:icon="@drawable/ic_calendar"
             android:title="@string/purchase_history"/>

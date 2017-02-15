@@ -88,9 +88,6 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_dashboard) {
             Intent intent = new Intent(this, DashboardActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_stock) {
-            Intent intent = new Intent(this, StockActivity.class);
-            startActivity(intent);
         } else if (id == R.id.nav_purchaseHistory) {
             Intent intent = new Intent(this, StockPurchaseActivity.class);
             startActivity(intent);

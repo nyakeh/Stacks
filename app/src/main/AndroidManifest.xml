@@ -17,10 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StockActivity"
-            android:label="@string/title_activity_stock">
-        </activity>
-        <activity
             android:name=".StockPurchaseActivity"
             android:label="@string/title_activity_stock_purchase"
             android:windowSoftInputMode="stateHidden">

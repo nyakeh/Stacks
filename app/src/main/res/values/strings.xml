@@ -9,7 +9,6 @@
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
     <string name="fee">Fee</string>
-    <string name="stock">Stock</string>
     <string name="purchase_history">Purchase History</string>
     <string name="title_activity_net_worth">NetWorthActivity</string>
     <string name="netWorth">Net Worth</string>

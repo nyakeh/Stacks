@@ -98,9 +98,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         if (id == R.id.nav_fund) {
             Intent intent = new Intent(this, FundActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_stock) {
-            Intent intent = new Intent(this, StockActivity.class);
-            startActivity(intent);
         } else if (id == R.id.nav_purchaseHistory) {
             Intent intent = new Intent(this, StockPurchaseActivity.class);
             startActivity(intent);
