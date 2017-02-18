@@ -43,19 +43,34 @@
                 android:inputType="numberDecimal"/>
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/metadata_financialIndependenceNumber"
+        <LinearLayout
+            android:id="@+id/layout_financialIndependenceNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_safeWithdrawalRate"
-            android:layout_marginTop="@dimen/auxiliary_margin"
-            tools:text="£1,000,000"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/auxiliary_margin"
+                android:layout_marginRight="4dp"
+                android:text="@string/financialIndependenceNumber"/>
+
+            <TextView
+                android:id="@+id/metadata_financialIndependenceNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/auxiliary_margin"
+                android:textColor="@color/colorPrimaryText"
+                tools:text="£1,000,000"/>
+        </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/layout_fundsWatchlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/metadata_financialIndependenceNumber">
+            android:layout_below="@+id/layout_financialIndependenceNumber">
 
             <EditText
                 android:id="@+id/metadata_fundsWatchlist"

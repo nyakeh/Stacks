@@ -29,4 +29,5 @@
     <string name="safe_withdrawal_rate">Safe Withdrawal Rate</string>
     <string name="funds_watchlist">Funds Watchlist</string>
     <string name="stock_exchange_prefix">Stock Exchange Prefix</string>
+    <string name="financialIndependenceNumber">Financial Independence Number</string>
 </resources>

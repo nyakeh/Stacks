@@ -74,7 +74,7 @@ public class ControlPanelActivity extends AppCompatActivity implements Navigatio
 
     private boolean inputValid() {
         if (_fundsWatchlist.getText().toString().trim().length() == 0 || !Pattern.matches(MONEY_VALUE_REGEX, _yearlyExpenses.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, _safeWithdrawalRate.getText().toString())) {
-            Snackbar.make(findViewById(R.id.app_bar_controlPanel), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.app_bar_controlPanel), "Input validation failed", Snackbar.LENGTH_LONG).show();
             return false;
         }
         return true;
