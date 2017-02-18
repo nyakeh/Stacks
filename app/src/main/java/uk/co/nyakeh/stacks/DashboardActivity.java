@@ -52,7 +52,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         Calendar cal = Calendar.getInstance();
         cal.set(1900, 01, 01);
         Date latestInvestment = cal.getTime();
-        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
+        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory();
         for (StockPurchase stockPurchase : stockPurchaseHistory) {
             purchasedStockTotal += stockPurchase.Total;
             purchasedStockQuantity += stockPurchase.Quantity;

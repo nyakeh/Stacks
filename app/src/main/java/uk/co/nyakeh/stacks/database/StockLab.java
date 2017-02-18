@@ -39,9 +39,9 @@ public class StockLab {
         mDatabase.insert(StockPurchaseTable.NAME, null, values);
     }
 
-    public List<StockPurchase> getStockPurchaseHistory(String stockSymbol) {
+    public List<StockPurchase> getStockPurchaseHistory() {
         ArrayList<StockPurchase> stockPurchases = new ArrayList<>();
-        StockPurchaseCursorWrapper cursor = queryStockPurchases(StockPurchaseTable.Cols.SYMBOL + " = ?", new String[]{stockSymbol});
+        StockPurchaseCursorWrapper cursor = queryStockPurchases(null, null);
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -101,7 +101,8 @@ public class StockLab {
                 null,
                 null,
                 null,
-                null);
+                null,
+                "1");
 
         return new MetadataCursorWrapper(cursor);
     }

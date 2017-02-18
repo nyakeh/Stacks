@@ -40,7 +40,7 @@ public class GainsWidget extends AppWidgetProvider implements IAsyncTask {
             double sharePrice = Double.parseDouble(share.get("l").toString());
             double purchaseCost = 0;
             int stockQuantity = 0;
-            List<StockPurchase> stockPurchaseHistory = StockLab.get(_context).getStockPurchaseHistory("VMID.L");
+            List<StockPurchase> stockPurchaseHistory = StockLab.get(_context).getStockPurchaseHistory();
             for (StockPurchase stockPurchase : stockPurchaseHistory) {
                 purchaseCost += stockPurchase.Total;
                 stockQuantity += stockPurchase.Quantity;

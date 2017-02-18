@@ -108,7 +108,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     }
 
     private void updateUI() {
-        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory("VMID.L");
+        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory();
 
         if (mStockPurchaseAdapter == null) {
             mStockPurchaseAdapter = new StockPurchaseAdapter(stockPurchaseHistory);
