@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import uk.co.nyakeh.stacks.database.StockLab;
+import uk.co.nyakeh.stacks.records.Metadata;
 import uk.co.nyakeh.stacks.records.StockPurchase;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IAsyncTask {
@@ -27,7 +28,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private TextView mPortfolio;
     private TextView mPercentageFI;
     private TextView mDaysSinceInvestment;
-    public static final int FI_TARGET = 420000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 latestInvestment = stockPurchase.DatePurchased;
             }
         }
+        Metadata metadata = StockLab.get(this).getMetadata();
 
         try {
             JSONObject share = new JSONObject(response);
@@ -68,7 +69,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             double purchaseSum = purchasedStockTotal;
             double changeInValue = portfolioSum - purchaseSum;
             double percentageChange = (changeInValue / purchaseSum) * 100;
-            double percentageFI = (portfolioSum / FI_TARGET) * 100;
+            double percentageFI = (portfolioSum / metadata.FinancialIndependenceNumber) * 100;
             mDiff.setText(getString(R.string.money_format, changeInValue));
             mPercentageChange.setText(getString(R.string.percentage_format, percentageChange));
             mPortfolio.setText(getString(R.string.money_format, portfolioSum));
