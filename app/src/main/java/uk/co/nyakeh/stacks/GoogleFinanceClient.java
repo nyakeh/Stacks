@@ -2,7 +2,6 @@ package uk.co.nyakeh.stacks;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -26,11 +25,9 @@ public class GoogleFinanceClient extends AsyncTask<String, Integer, String> {
         String result = "";
         String share = params[0];
         StockCache stockCache = StockCache.GetInstance();
-        if (stockCache.ServeCachedResult(share)){
-            Log.d("cache", share + "old data");
+        if (stockCache.ServeCachedResult(share)) {
             return stockCache.CachedLookupFor(share);
         }
-        Log.d("fresh", share + "lookup performed");
         Request request = new Request.Builder()
                 .url(GOOGLE_FINANCE_URL + share)
                 .build();

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
+import uk.co.nyakeh.stacks.database.MetadataDbSchema.MetadataTable;
 import uk.co.nyakeh.stacks.records.Metadata;
 import uk.co.nyakeh.stacks.records.StockPurchase;
 
@@ -76,6 +77,11 @@ public class StockLab {
         return metadata;
     }
 
+    public void updateMetadata(Metadata metadata) {
+        ContentValues values = getMetadataContentValues(metadata);
+        mDatabase.update(MetadataTable.NAME, values, null, null);
+    }
+
     private StockPurchaseCursorWrapper queryStockPurchases(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(StockPurchaseTable.NAME,
                 null,  // Columns - null selects *
@@ -109,6 +115,16 @@ public class StockLab {
         values.put(StockPurchaseTable.Cols.QUANTITY, stockPurchase.Quantity);
         values.put(StockPurchaseTable.Cols.FEE, stockPurchase.Fee);
         values.put(StockPurchaseTable.Cols.TOTAL, stockPurchase.Total);
+        return values;
+    }
+
+    private ContentValues getMetadataContentValues(Metadata metadata) {
+        ContentValues values = new ContentValues();
+        values.put(MetadataTable.Cols.YEARLYEXPENSES, metadata.YearlyExpenses);
+        values.put(MetadataTable.Cols.SAFEWITHDRAWALRATE, metadata.SafeWithdrawalRate);
+        values.put(MetadataTable.Cols.FINANCIALINDEPENDENCENUMBER, metadata.FinancialIndependenceNumber);
+        values.put(MetadataTable.Cols.FUNDSWATCHLIST, metadata.FundsWatchlist);
+        values.put(MetadataTable.Cols.STOCKEXCHANGEPREFIX, metadata.StockExchangePrefix);
         return values;
     }
 }

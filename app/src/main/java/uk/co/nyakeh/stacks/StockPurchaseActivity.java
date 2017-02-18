@@ -95,13 +95,13 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), mStockPurchaseDate, Double.parseDouble(mPriceField.getText().toString()), Integer.parseInt(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
             StockLab.get(this).addStockPurchase(stockPurchase);
             updateUI();
-            Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Stock purchase stored", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.app_bar_stockPurchase), "Stock purchase stored", Snackbar.LENGTH_LONG).show();
         }
     }
 
     private boolean purchaseInputValid() {
         if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(THREE_DECIMAL_PLACES_REGEX, mPriceField.getText().toString()) || !Pattern.matches(WHOLE_NUMBER_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
-            Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.app_bar_stockPurchase), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -206,7 +206,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             final StockPurchase stock = mStockPurchases.remove(position);
             StockLab.get(getParent()).deleteStockPurchase(stock.Id);
             notifyItemRemoved(position);
-            Snackbar.make(findViewById(R.id.app_bar_stock_purchase), "Purchase deleted", Snackbar.LENGTH_LONG)
+            Snackbar.make(findViewById(R.id.app_bar_stockPurchase), "Purchase deleted", Snackbar.LENGTH_LONG)
                     .setAction("Undo", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
