@@ -60,6 +60,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 latestInvestment = stockPurchase.DatePurchased;
             }
         }
+
         Metadata metadata = StockLab.get(this).getMetadata();
 
         try {

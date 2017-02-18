@@ -7,20 +7,27 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.nyakeh.stacks.database.StockLab;
+import uk.co.nyakeh.stacks.records.Metadata;
+
 public class FundActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IAsyncTask {
-    private TextView _vmidPrice;
-    private TextView _vmidChange;
-    private TextView _vwrlPrice;
-    private TextView _vwrlChange;
-    private TextView _vukePrice;
-    private TextView _vukeChange;
+    private RecyclerView _recyclerView;
+    private FundAdapter _fundAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,39 +37,78 @@ public class FundActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         SetupNavigation(toolbar);
 
-        _vmidPrice = (TextView) findViewById(R.id.fund_vmidPrice);
-        _vmidChange = (TextView) findViewById(R.id.fund_vmidChange);
-        _vwrlPrice = (TextView) findViewById(R.id.fund_vwrlPrice);
-        _vwrlChange = (TextView) findViewById(R.id.fund_vwrlChange);
-        _vukePrice = (TextView) findViewById(R.id.fund_vukePrice);
-        _vukeChange = (TextView) findViewById(R.id.fund_vukeChange);
-        new GoogleFinanceClient(this, this).execute("LON:VMID");
-        new GoogleFinanceClient(this, this).execute("LON:VWRL");
-        new GoogleFinanceClient(this, this).execute("LON:VUKE");
+        _recyclerView = (RecyclerView) findViewById(R.id.fundWatchlist_recycler_view);
+        _recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        _fundAdapter = new FundAdapter();
+        _recyclerView.setAdapter(_fundAdapter);
+
+        Metadata metadata = StockLab.get(this).getMetadata();
+        String[] fundsWatchlist = metadata.FundsWatchlist.split(",");
+        for (String fund : fundsWatchlist) {
+            new GoogleFinanceClient(this, this).execute(metadata.StockExchangePrefix + fund);
+        }
     }
 
     public void PostExecute(String response) {
         try {
             JSONObject share = new JSONObject(response);
+            String symbol = share.get("t").toString();
             double price = Double.parseDouble(share.get("l").toString());
             String change = share.get("cp").toString();
-            String symbol = share.get("t").toString();
-            switch (symbol){
-                case "VMID":
-                    _vmidPrice.setText(getString(R.string.money_format, price));
-                    _vmidChange.setText(getString(R.string.percentage_string_format, change));
-                    break;
-                case "VWRL":
-                    _vwrlPrice.setText(getString(R.string.money_format, price));
-                    _vwrlChange.setText(getString(R.string.percentage_string_format, change));
-                    break;
-                case "VUKE":
-                    _vukePrice.setText(getString(R.string.money_format, price));
-                    _vukeChange.setText(getString(R.string.percentage_string_format, change));
-                    break;
-            }
+            Fund fund = new Fund(symbol, price, change);
+            _fundAdapter.Add(fund);
         } catch (JSONException exception) {
             exception.printStackTrace();
+        }
+    }
+
+    private class FundHolder extends RecyclerView.ViewHolder {
+        private TextView _symbol;
+        private TextView _price;
+        private TextView _change;
+
+        public FundHolder(View itemView) {
+            super(itemView);
+            _symbol = (TextView) itemView.findViewById(R.id.fund_symbol);
+            _price = (TextView) itemView.findViewById(R.id.fund_price);
+            _change = (TextView) itemView.findViewById(R.id.fund_change);
+        }
+
+        private void bindFund(Fund fund) {
+            _symbol.setText(fund.Symbol);
+            _price.setText(getString(R.string.money_format, fund.Price));
+            _change.setText(getString(R.string.percentage_string_format, fund.Change));
+        }
+    }
+
+    private class FundAdapter extends RecyclerView.Adapter<FundHolder> {
+        private List<Fund> _funds;
+
+        public FundAdapter() {
+            _funds = new ArrayList();
+        }
+
+        @Override
+        public FundHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(FundActivity.this);
+            View view = layoutInflater.inflate(R.layout.list_item_fund, parent, false);
+            return new FundHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(FundHolder fundHolder, int position) {
+            Fund fund = _funds.get(position);
+            fundHolder.bindFund(fund);
+        }
+
+        @Override
+        public int getItemCount() {
+            return _funds.size();
+        }
+
+        public void Add(Fund fund) {
+            _funds.add(fund);
+            notifyItemInserted(_funds.size());
         }
     }
 
