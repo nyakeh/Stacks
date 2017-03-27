@@ -131,6 +131,9 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         } else if (id == R.id.nav_fund) {
             Intent intent = new Intent(this, FundActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_dividend) {
+            Intent intent = new Intent(this, DividendActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_controlPanel) {
             Intent intent = new Intent(this, ControlPanelActivity.class);
             startActivity(intent);
@@ -157,7 +160,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             super(itemView);
             mSymbolTextView = (TextView) itemView.findViewById(R.id.list_item_symbol);
             mDatePurchasedTextView = (TextView) itemView.findViewById(R.id.list_item_date);
-            mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_price);
+            mPriceTextView = (TextView) itemView.findViewById(R.id.list_item_amount);
             mQuantityTextView = (TextView) itemView.findViewById(R.id.list_item_quantity);
             mTotalTextView = (TextView) itemView.findViewById(R.id.list_item_total);
         }

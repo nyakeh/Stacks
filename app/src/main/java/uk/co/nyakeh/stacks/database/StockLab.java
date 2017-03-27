@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
 import uk.co.nyakeh.stacks.database.MetadataDbSchema.MetadataTable;
+import uk.co.nyakeh.stacks.records.Dividend;
 import uk.co.nyakeh.stacks.records.Metadata;
 import uk.co.nyakeh.stacks.records.StockPurchase;
 
@@ -39,6 +40,11 @@ public class StockLab {
         mDatabase.insert(StockPurchaseTable.NAME, null, values);
     }
 
+    public void addDividend(Dividend dividend) {
+        /*ContentValues values = getDividendContentValues(dividend);
+        mDatabase.insert(DividendTable.NAME, null, values);*/
+    }
+
     public List<StockPurchase> getStockPurchaseHistory() {
         ArrayList<StockPurchase> stockPurchases = new ArrayList<>();
         StockPurchaseCursorWrapper cursor = queryStockPurchases(null, null);
@@ -61,8 +67,34 @@ public class StockLab {
         return stockPurchases;
     }
 
+    public List<Dividend> getDividendHistory() {
+        ArrayList<Dividend> dividends = new ArrayList<>();
+        /*DividendCursorWrapper cursor = queryDividends(null, null);
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Dividend dividend = cursor.getDividend();
+                dividends.add(dividend);
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        Collections.sort(dividends, new Comparator<Dividend>() {
+            @Override
+            public int compare(Dividend purchase1, Dividend purchase2) {
+                return purchase1.Date.compareTo(purchase2.Date);
+            }
+        });*/
+        return dividends;
+    }
+
     public void deleteStockPurchase(UUID id) {
         mDatabase.delete(StockPurchaseTable.NAME, StockPurchaseTable.Cols.ID + " = ?", new String[]{id.toString()});
+    }
+
+    public void deleteDividend(UUID id) {
+        /*mDatabase.delete(DividendTable.NAME, DividendTable.Cols.ID + " = ?", new String[]{id.toString()});*/
     }
 
     public Metadata getMetadata() {

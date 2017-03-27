@@ -98,6 +98,9 @@ public class ControlPanelActivity extends AppCompatActivity implements Navigatio
         } else if (id == R.id.nav_fund) {
             Intent intent = new Intent(this, FundActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_dividend) {
+            Intent intent = new Intent(this, DividendActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_purchaseHistory) {
             Intent intent = new Intent(this, StockPurchaseActivity.class);
             startActivity(intent);

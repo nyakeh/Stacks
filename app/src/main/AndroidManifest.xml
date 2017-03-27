@@ -22,6 +22,11 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
+            android:name=".DividendActivity"
+            android:label="@string/title_activity_dividend"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
             android:name=".FundActivity"
             android:label="">
         </activity>

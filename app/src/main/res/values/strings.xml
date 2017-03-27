@@ -30,4 +30,6 @@
     <string name="funds_watchlist">Funds Watchlist</string>
     <string name="stock_exchange_prefix">Stock Exchange Prefix</string>
     <string name="financialIndependenceNumber">Financial Independence Number</string>
+    <string name="title_activity_dividend">Dividend</string>
+    <string name="amount">Amount</string>
 </resources>
