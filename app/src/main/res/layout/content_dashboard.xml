@@ -50,10 +50,40 @@
             tools:text="7.95%"/>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/dashboard_portfolio_card"
+            android:id="@+id/dashboard_dividendYield_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dashboard_percentageChange"
+            android:layout_margin="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/dashboard_dividendYield"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/auxiliary_margin"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                tools:text="£85.30"/>
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/dashboard_dividendPercentageYield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dashboard_dividendYield_card"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:text="1.43%"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/dashboard_portfolio_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dashboard_dividendPercentageYield"
             android:layout_margin="@dimen/activity_vertical_margin">
 
             <TextView
