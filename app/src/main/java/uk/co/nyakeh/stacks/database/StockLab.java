@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
 import uk.co.nyakeh.stacks.database.MetadataDbSchema.MetadataTable;
+import uk.co.nyakeh.stacks.database.DividendDbSchema.DividendTable;
 import uk.co.nyakeh.stacks.records.Dividend;
 import uk.co.nyakeh.stacks.records.Metadata;
 import uk.co.nyakeh.stacks.records.StockPurchase;
@@ -41,8 +42,8 @@ public class StockLab {
     }
 
     public void addDividend(Dividend dividend) {
-        /*ContentValues values = getDividendContentValues(dividend);
-        mDatabase.insert(DividendTable.NAME, null, values);*/
+        ContentValues values = getDividendContentValues(dividend);
+        mDatabase.insert(DividendTable.NAME, null, values);
     }
 
     public List<StockPurchase> getStockPurchaseHistory() {
@@ -69,7 +70,7 @@ public class StockLab {
 
     public List<Dividend> getDividendHistory() {
         ArrayList<Dividend> dividends = new ArrayList<>();
-        /*DividendCursorWrapper cursor = queryDividends(null, null);
+        DividendCursorWrapper cursor = queryDividend();
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
@@ -85,7 +86,7 @@ public class StockLab {
             public int compare(Dividend purchase1, Dividend purchase2) {
                 return purchase1.Date.compareTo(purchase2.Date);
             }
-        });*/
+        });
         return dividends;
     }
 
@@ -94,7 +95,7 @@ public class StockLab {
     }
 
     public void deleteDividend(UUID id) {
-        /*mDatabase.delete(DividendTable.NAME, DividendTable.Cols.ID + " = ?", new String[]{id.toString()});*/
+        mDatabase.delete(DividendTable.NAME, DividendTable.Cols.ID + " = ?", new String[]{id.toString()});
     }
 
     public Metadata getMetadata() {
@@ -139,6 +140,18 @@ public class StockLab {
         return new MetadataCursorWrapper(cursor);
     }
 
+    private DividendCursorWrapper queryDividend() {
+        Cursor cursor = mDatabase.query(DividendDbSchema.DividendTable.NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        return new DividendCursorWrapper(cursor);
+    }
+
     private ContentValues getStockPurchaseContentValues(StockPurchase stockPurchase) {
         ContentValues values = new ContentValues();
         values.put(StockPurchaseTable.Cols.ID, stockPurchase.Id.toString());
@@ -158,6 +171,14 @@ public class StockLab {
         values.put(MetadataTable.Cols.FINANCIALINDEPENDENCENUMBER, metadata.FinancialIndependenceNumber);
         values.put(MetadataTable.Cols.FUNDSWATCHLIST, metadata.FundsWatchlist);
         values.put(MetadataTable.Cols.STOCKEXCHANGEPREFIX, metadata.StockExchangePrefix);
+        return values;
+    }
+
+    private ContentValues getDividendContentValues(Dividend dividend) {
+        ContentValues values = new ContentValues();
+        values.put(DividendTable.Cols.ID, dividend.Id.toString());
+        values.put(DividendTable.Cols.DATE, dividend.Date.getTime());
+        values.put(DividendTable.Cols.AMOUNT, dividend.Amount);
         return values;
     }
 }
