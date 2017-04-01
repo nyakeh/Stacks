@@ -18,7 +18,7 @@ import android.widget.TextView;
 import java.util.regex.Pattern;
 
 import uk.co.nyakeh.stacks.database.StockLab;
-import uk.co.nyakeh.stacks.records.Metadata;
+import uk.co.nyakeh.stacks.objects.Metadata;
 
 public class ControlPanelActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String MONEY_VALUE_REGEX = "^(\\d*\\.\\d{1,2}|\\d+)$";

@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import uk.co.nyakeh.stacks.database.MetadataDbSchema.MetadataTable;
-import uk.co.nyakeh.stacks.records.Metadata;
+import uk.co.nyakeh.stacks.objects.Metadata;
 
 public class MetadataCursorWrapper extends CursorWrapper {
     public MetadataCursorWrapper(Cursor cursor) {

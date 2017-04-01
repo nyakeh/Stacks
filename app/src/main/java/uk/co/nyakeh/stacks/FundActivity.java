@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.nyakeh.stacks.database.StockLab;
-import uk.co.nyakeh.stacks.records.Metadata;
+import uk.co.nyakeh.stacks.objects.Fund;
+import uk.co.nyakeh.stacks.objects.Metadata;
 
 public class FundActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IAsyncTask {
     private RecyclerView _recyclerView;

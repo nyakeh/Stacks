@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import uk.co.nyakeh.stacks.database.StockLab;
-import uk.co.nyakeh.stacks.records.StockPurchase;
+import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class GainsWidget extends AppWidgetProvider implements IAsyncTask {
     private AppWidgetManager _appWidgetManager;

@@ -1,4 +1,4 @@
-package uk.co.nyakeh.stacks;
+package uk.co.nyakeh.stacks.objects;
 
 public class Fund {
     public String Symbol;

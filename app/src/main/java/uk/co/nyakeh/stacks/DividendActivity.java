@@ -29,7 +29,7 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 import uk.co.nyakeh.stacks.database.StockLab;
-import uk.co.nyakeh.stacks.records.Dividend;
+import uk.co.nyakeh.stacks.objects.Dividend;
 
 public class DividendActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DateDialogCallbackInterface  {
     private RecyclerView _recyclerView;

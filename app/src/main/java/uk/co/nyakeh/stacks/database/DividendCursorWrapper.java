@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import uk.co.nyakeh.stacks.database.DividendDbSchema.DividendTable;
-import uk.co.nyakeh.stacks.records.Dividend;
+import uk.co.nyakeh.stacks.objects.Dividend;
 
 public class DividendCursorWrapper extends CursorWrapper {
     public DividendCursorWrapper(Cursor cursor) {

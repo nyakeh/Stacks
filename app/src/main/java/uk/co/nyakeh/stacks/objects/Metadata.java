@@ -1,4 +1,4 @@
-package uk.co.nyakeh.stacks.records;
+package uk.co.nyakeh.stacks.objects;
 
 public class Metadata {
     public double YearlyExpenses;

@@ -14,9 +14,9 @@ import java.util.UUID;
 import uk.co.nyakeh.stacks.database.StockDbSchema.StockPurchaseTable;
 import uk.co.nyakeh.stacks.database.MetadataDbSchema.MetadataTable;
 import uk.co.nyakeh.stacks.database.DividendDbSchema.DividendTable;
-import uk.co.nyakeh.stacks.records.Dividend;
-import uk.co.nyakeh.stacks.records.Metadata;
-import uk.co.nyakeh.stacks.records.StockPurchase;
+import uk.co.nyakeh.stacks.objects.Dividend;
+import uk.co.nyakeh.stacks.objects.Metadata;
+import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class StockLab {
     private static StockLab sStockLab;
