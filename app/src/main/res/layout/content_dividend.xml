@@ -35,7 +35,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/dividend_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/newDividend"
         android:background="@color/red"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
