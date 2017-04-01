@@ -32,4 +32,6 @@
     <string name="financialIndependenceNumber">Financial Independence Number</string>
     <string name="title_activity_dividend">Dividend</string>
     <string name="amount">Amount</string>
+    <string name="amount_label">Amount</string>
+    <string name="date_label">Date</string>
 </resources>

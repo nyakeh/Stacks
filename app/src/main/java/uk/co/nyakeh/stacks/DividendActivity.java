@@ -87,7 +87,6 @@ public class DividendActivity extends AppCompatActivity implements NavigationVie
             Dividend dividend = new Dividend(UUID.randomUUID(), _dividendDate, Double.parseDouble(_dividendAmount.getText().toString()));
             StockLab.get(this).addDividend(dividend);
             updateUI();
-            Snackbar.make(findViewById(R.id.app_bar_dividend), "Dividend stored", Snackbar.LENGTH_LONG).show();
         }
     }
 
