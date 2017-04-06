@@ -86,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             mDividendYield.setText(getString(R.string.money_format, dividendSum));
             mDividendPercentageYield.setText(getString(R.string.percentage_format, dividendPercentageYield));
             mPortfolio.setText(getString(R.string.money_format, portfolioSum));
-            mPercentageFI.setText(getString(R.string.percentage_fi, percentageFI));
+            mPercentageFI.setText(getString(R.string.percentage_fi_format, percentageFI));
 
             long diff = new Date().getTime() - latestInvestment.getTime();
             int daysSinceInvestment = (int) (diff / (24 * 60 * 60 * 1000));

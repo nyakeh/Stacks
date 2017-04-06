@@ -15,7 +15,7 @@
     <string name="money_format">£%,.2f</string>
     <string name="threeDecimalPlaces_format">£%,.3f</string>
     <string name="percentage_format">%.2f%%</string>
-    <string name="percentage_fi">%,.4f%% fi</string>
+    <string name="percentage_fi_format">%,.4f%% fi</string>
     <string name="percentage_string_format">%s%%</string>
     <string name="days_format">%d days</string>
     <string name="dashboard">Dashboard</string>
@@ -36,6 +36,9 @@
     <string name="date_label">Date</string>
     <string name="portfolio_value">Portfolio value</string>
     <string name="investment_gain">Investment gain</string>
-    <string name="dividend_gain">Dividend gain</string>
+    <string name="dividend_yield">Dividend yield</string>
     <string name="days_without_investment">Days without investment</string>
+    <string name="percentage_growth">Percentage growth</string>
+    <string name="percentage_dividend_yield">Percentage dividend yield</string>
+    <string name="percentage_fi">Percentage FI</string>
 </resources>
