@@ -34,4 +34,5 @@
     <string name="amount">Amount</string>
     <string name="amount_label">Amount</string>
     <string name="date_label">Date</string>
+    <string name="portfolio_value">Portfolio value</string>
 </resources>
