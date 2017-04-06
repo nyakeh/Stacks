@@ -35,4 +35,7 @@
     <string name="amount_label">Amount</string>
     <string name="date_label">Date</string>
     <string name="portfolio_value">Portfolio value</string>
+    <string name="investment_gain">Investment gain</string>
+    <string name="dividend_gain">Dividend gain</string>
+    <string name="days_without_investment">Days without investment</string>
 </resources>
