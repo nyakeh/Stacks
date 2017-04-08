@@ -39,9 +39,8 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     private EditText mQuantityField;
     private EditText mFeeField;
     private Button mStockPurchaseDateButton;
-    private static final String WHOLE_NUMBER_REGEX = "(^[0-9]+)(?!.+)";
     private static final String MONEY_VALUE_REGEX = "^(\\d*\\.\\d{1,2}|\\d+)$";
-    private static final String THREE_DECIMAL_PLACES_REGEX = "^(\\d*\\.\\d{1,3}|\\d+)$";
+    private static final String SIX_DECIMAL_PLACES_REGEX = "^(\\d*\\.\\d{1,6}|\\d+)$";
     private Date mStockPurchaseDate = new Date();
 
     @Override
@@ -92,7 +91,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
 
     private void addStockPurchase() {
         if (purchaseInputValid()){
-            StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), mStockPurchaseDate, Double.parseDouble(mPriceField.getText().toString()), Integer.parseInt(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
+            StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), mStockPurchaseDate, Double.parseDouble(mPriceField.getText().toString()), Double.parseDouble(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
             StockLab.get(this).addStockPurchase(stockPurchase);
             updateUI();
             Snackbar.make(findViewById(R.id.app_bar_stockPurchase), "Stock purchase stored", Snackbar.LENGTH_LONG).show();
@@ -100,7 +99,7 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
     }
 
     private boolean purchaseInputValid() {
-        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(THREE_DECIMAL_PLACES_REGEX, mPriceField.getText().toString()) || !Pattern.matches(WHOLE_NUMBER_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
+        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(SIX_DECIMAL_PLACES_REGEX, mPriceField.getText().toString()) || !Pattern.matches(SIX_DECIMAL_PLACES_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
             Snackbar.make(findViewById(R.id.app_bar_stockPurchase), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
             return false;
         }

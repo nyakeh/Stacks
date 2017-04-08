@@ -35,7 +35,7 @@
             android:id="@+id/newStockPurchase_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:hint="@string/quantity"/>
 
         <EditText

@@ -8,11 +8,11 @@ public class StockPurchase {
     public String Symbol;
     public Date DatePurchased;
     public double Price;
-    public int Quantity;
+    public double Quantity;
     public double Fee;
     public double Total;
 
-    public StockPurchase(UUID id, String symbol, Date datePurchased, double price, int quantity, double fee) {
+    public StockPurchase(UUID id, String symbol, Date datePurchased, double price, double quantity, double fee) {
         Id = id;
         Symbol = symbol;
         DatePurchased = datePurchased;
@@ -22,7 +22,7 @@ public class StockPurchase {
         Total = (quantity * price) + fee;
     }
 
-    public StockPurchase(UUID id, String symbol, Date datePurchased, double price, int quantity, double fee, double total) {
+    public StockPurchase(UUID id, String symbol, Date datePurchased, double price, double quantity, double fee, double total) {
         Id = id;
         Symbol = symbol;
         DatePurchased = datePurchased;
