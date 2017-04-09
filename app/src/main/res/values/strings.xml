@@ -41,4 +41,5 @@
     <string name="percentage_growth">Percentage growth</string>
     <string name="percentage_dividend_yield">Percentage dividend yield</string>
     <string name="percentage_fi">Percentage FI</string>
+    <string name="cantFindStock_format">Unable to find \'%s\' current price</string>
 </resources>

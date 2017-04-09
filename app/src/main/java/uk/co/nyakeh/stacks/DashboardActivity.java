@@ -3,6 +3,7 @@ package uk.co.nyakeh.stacks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,12 +12,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.Dividend;
@@ -47,53 +51,62 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         mPortfolio = (TextView) findViewById(R.id.dashboard_portfolio);
         mPercentageFI = (TextView) findViewById(R.id.dashboard_percentageFI);
         mDaysSinceInvestment = (TextView) findViewById(R.id.dashboard_daysSinceInvestment);
-        new GoogleFinanceClient(this, this).execute("LON:VMID");
+        new GoogleFinanceClient(this, this).execute("VMID,VANG_FTSE_GLB_3GLTQB");
     }
 
     public void PostExecute(String response) {
+        Map<String, Double> sharePrices = new HashMap<>();
+        try {
+            response = response.replace("//","");
+            JSONArray arr = new JSONArray(response);
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject share = arr.optJSONObject(i);
+                double sharePrice = Double.parseDouble(share.get("l").toString());
+                String shareName = share.getString("t").toString();
+                sharePrices.put(shareName, sharePrice);
+            }
+        } catch (JSONException exception) {
+            exception.printStackTrace();
+        }
+
         double purchaseSum = 0;
-        int purchasedStockQuantity = 0;
+        double portfolioSum = 0;
         Calendar cal = Calendar.getInstance();
         cal.set(1900, 01, 01);
         Date latestInvestment = cal.getTime();
         List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory();
         for (StockPurchase stockPurchase : stockPurchaseHistory) {
             purchaseSum += stockPurchase.Total;
-            purchasedStockQuantity += stockPurchase.Quantity;
+            if (sharePrices.containsKey(stockPurchase.Symbol)) {
+                portfolioSum += sharePrices.get(stockPurchase.Symbol) * stockPurchase.Quantity;
+            }else {
+                Snackbar.make(findViewById(R.id.app_bar_dashboard), getString(R.string.cantFindStock_format, stockPurchase.Symbol), Snackbar.LENGTH_LONG).show();
+            }
             if (stockPurchase.DatePurchased.after(latestInvestment)) {
                 latestInvestment = stockPurchase.DatePurchased;
             }
         }
 
         Metadata metadata = StockLab.get(this).getMetadata();
-
         double dividendSum = 0;
         List<Dividend> dividendHistory = StockLab.get(this).getDividendHistory();
         for (Dividend dividend : dividendHistory) {
             dividendSum += dividend.Amount;
         }
 
-        try {
-            JSONObject share = new JSONObject(response);
-            double sharePrice = Double.parseDouble(share.get("l").toString());
-            double portfolioSum = sharePrice * purchasedStockQuantity;
-            double changeInValue = portfolioSum - purchaseSum;
-            double percentageChange = (changeInValue / purchaseSum) * 100;
-            double percentageFI = (portfolioSum / metadata.FinancialIndependenceNumber) * 100;
-            double dividendPercentageYield = (dividendSum / portfolioSum) * 100;
-            mDiff.setText(getString(R.string.money_format, changeInValue));
-            mPercentageChange.setText(getString(R.string.percentage_format, percentageChange));
-            mDividendYield.setText(getString(R.string.money_format, dividendSum));
-            mDividendPercentageYield.setText(getString(R.string.percentage_format, dividendPercentageYield));
-            mPortfolio.setText(getString(R.string.money_format, portfolioSum));
-            mPercentageFI.setText(getString(R.string.percentage_fi_format, percentageFI));
-
-            long diff = new Date().getTime() - latestInvestment.getTime();
-            int daysSinceInvestment = (int) (diff / (24 * 60 * 60 * 1000));
-            mDaysSinceInvestment.setText(getString(R.string.days_format, daysSinceInvestment));
-        } catch (JSONException exception) {
-            exception.printStackTrace();
-        }
+        double changeInValue = portfolioSum - purchaseSum;
+        double percentageChange = (changeInValue / purchaseSum) * 100;
+        double percentageFI = (portfolioSum / metadata.FinancialIndependenceNumber) * 100;
+        double dividendPercentageYield = (dividendSum / portfolioSum) * 100;
+        mDiff.setText(getString(R.string.money_format, changeInValue));
+        mPercentageChange.setText(getString(R.string.percentage_format, percentageChange));
+        mDividendYield.setText(getString(R.string.money_format, dividendSum));
+        mDividendPercentageYield.setText(getString(R.string.percentage_format, dividendPercentageYield));
+        mPortfolio.setText(getString(R.string.money_format, portfolioSum));
+        mPercentageFI.setText(getString(R.string.percentage_fi_format, percentageFI));
+        long diff = new Date().getTime() - latestInvestment.getTime();
+        int daysSinceInvestment = (int) (diff / (24 * 60 * 60 * 1000));
+        mDaysSinceInvestment.setText(getString(R.string.days_format, daysSinceInvestment));
     }
 
     private void SetupNavigation(Toolbar toolbar) {

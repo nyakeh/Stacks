@@ -21,8 +21,7 @@
             android:id="@+id/newStockPurchase_symbol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/symbol"
-            android:text="VMID.L"/>
+            android:hint="@string/symbol"/>
 
         <EditText
             android:id="@+id/newStockPurchase_price"
