@@ -94,7 +94,6 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), mStockPurchaseDate, Double.parseDouble(mPriceField.getText().toString()), Double.parseDouble(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
             StockLab.get(this).addStockPurchase(stockPurchase);
             updateUI();
-            Snackbar.make(findViewById(R.id.app_bar_stockPurchase), "Stock purchase stored", Snackbar.LENGTH_LONG).show();
         }
     }
 
