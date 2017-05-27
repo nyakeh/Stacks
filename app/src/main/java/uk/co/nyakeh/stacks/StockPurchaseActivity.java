@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Date;
-`import java.util.Iterator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
