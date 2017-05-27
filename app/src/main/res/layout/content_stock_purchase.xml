@@ -17,6 +17,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/newStockPurchase_investmentSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32dp"
+            android:gravity="center"
+            tools:text="£5632.28 invested"/>
+
         <EditText
             android:id="@+id/newStockPurchase_symbol"
             android:layout_width="match_parent"
@@ -27,22 +35,22 @@
             android:id="@+id/newStockPurchase_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="@string/price"/>
+            android:hint="@string/price"
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/newStockPurchase_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="@string/quantity"/>
+            android:hint="@string/quantity"
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/newStockPurchase_fee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="@string/fee"/>
+            android:hint="@string/fee"
+            android:inputType="numberDecimal"/>
 
         <Button
             android:id="@+id/stock_purchase_date"

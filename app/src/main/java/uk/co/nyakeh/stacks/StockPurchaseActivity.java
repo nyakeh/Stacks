@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Date;
+`import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -32,16 +33,17 @@ import uk.co.nyakeh.stacks.database.StockLab;
 import uk.co.nyakeh.stacks.objects.StockPurchase;
 
 public class StockPurchaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DateDialogCallbackInterface  {
-    private RecyclerView mRecyclerView;
-    private StockPurchaseAdapter mStockPurchaseAdapter;
-    private EditText mSymbolField;
-    private EditText mPriceField;
-    private EditText mQuantityField;
-    private EditText mFeeField;
-    private Button mStockPurchaseDateButton;
+    private RecyclerView _recyclerView;
+    private StockPurchaseAdapter _stockPurchaseAdapter;
+    private TextView _investmentSum;
+    private EditText _symbolField;
+    private EditText _priceField;
+    private EditText _quantityField;
+    private EditText _feeField;
+    private Button _stockPurchaseDateButton;
+    private Date _stockPurchaseDate = new Date();
     private static final String MONEY_VALUE_REGEX = "^(\\d*\\.\\d{1,2}|\\d+)$";
     private static final String SIX_DECIMAL_PLACES_REGEX = "^(\\d*\\.\\d{1,6}|\\d+)$";
-    private Date mStockPurchaseDate = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +60,19 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
         NavigationView navigationView = (NavigationView) findViewById(R.id.stock_purchase_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mSymbolField = (EditText) findViewById(R.id.newStockPurchase_symbol);
-        mPriceField = (EditText) findViewById(R.id.newStockPurchase_price);
-        mQuantityField = (EditText) findViewById(R.id.newStockPurchase_quantity);
-        mFeeField = (EditText) findViewById(R.id.newStockPurchase_fee);
-        mStockPurchaseDateButton = (Button) findViewById(R.id.stock_purchase_date);
+        _investmentSum = (TextView) findViewById(R.id.newStockPurchase_investmentSum);
+        _symbolField = (EditText) findViewById(R.id.newStockPurchase_symbol);
+        _priceField = (EditText) findViewById(R.id.newStockPurchase_price);
+        _quantityField = (EditText) findViewById(R.id.newStockPurchase_quantity);
+        _feeField = (EditText) findViewById(R.id.newStockPurchase_fee);
+        _stockPurchaseDateButton = (Button) findViewById(R.id.stock_purchase_date);
 
-        mStockPurchaseDateButton.setText(DateFormat.format("EEEE, MMM dd, yyyy", mStockPurchaseDate).toString());
-        mStockPurchaseDateButton.setOnClickListener(new View.OnClickListener() {
+        _stockPurchaseDateButton.setText(DateFormat.format("EEEE, MMM dd, yyyy", _stockPurchaseDate).toString());
+        _stockPurchaseDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mStockPurchaseDate);
+                DatePickerFragment dialog = DatePickerFragment.newInstance(_stockPurchaseDate);
                 dialog.show(manager, "DialogDate");
             }
         });
@@ -82,23 +85,23 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
             }
         });
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.stockPurchase_recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        _recyclerView = (RecyclerView) findViewById(R.id.stockPurchase_recycler_view);
+        _recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        _recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
         updateUI();
     }
 
     private void addStockPurchase() {
         if (purchaseInputValid()){
-            StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), mSymbolField.getText().toString(), mStockPurchaseDate, Double.parseDouble(mPriceField.getText().toString()), Double.parseDouble(mQuantityField.getText().toString()), Double.parseDouble(mFeeField.getText().toString()));
+            StockPurchase stockPurchase = new StockPurchase(UUID.randomUUID(), _symbolField.getText().toString(), _stockPurchaseDate, Double.parseDouble(_priceField.getText().toString()), Double.parseDouble(_quantityField.getText().toString()), Double.parseDouble(_feeField.getText().toString()));
             StockLab.get(this).addStockPurchase(stockPurchase);
             updateUI();
         }
     }
 
     private boolean purchaseInputValid() {
-        if (mSymbolField.getText().toString().trim().length() == 0 || !Pattern.matches(SIX_DECIMAL_PLACES_REGEX, mPriceField.getText().toString()) || !Pattern.matches(SIX_DECIMAL_PLACES_REGEX, mQuantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, mFeeField.getText().toString())){
+        if (_symbolField.getText().toString().trim().length() == 0 || !Pattern.matches(SIX_DECIMAL_PLACES_REGEX, _priceField.getText().toString()) || !Pattern.matches(SIX_DECIMAL_PLACES_REGEX, _quantityField.getText().toString()) || !Pattern.matches(MONEY_VALUE_REGEX, _feeField.getText().toString())){
             Snackbar.make(findViewById(R.id.app_bar_stockPurchase), "Please fill in all fields", Snackbar.LENGTH_LONG).show();
             return false;
         }
@@ -107,16 +110,21 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
 
     private void updateUI() {
         List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory();
-
-        if (mStockPurchaseAdapter == null) {
-            mStockPurchaseAdapter = new StockPurchaseAdapter(stockPurchaseHistory);
-            mRecyclerView.setAdapter(mStockPurchaseAdapter);
-            ItemTouchHelper.Callback callback = new SwipeCallback(mStockPurchaseAdapter);
+        double investmentSum = 0;
+        for(Iterator<StockPurchase> i = stockPurchaseHistory.iterator(); i.hasNext(); ) {
+            StockPurchase item = i.next();
+            investmentSum += item.Total;
+        }
+        _investmentSum.setText(getString(R.string.investmentSum_format, investmentSum));
+        if (_stockPurchaseAdapter == null) {
+            _stockPurchaseAdapter = new StockPurchaseAdapter(stockPurchaseHistory);
+            _recyclerView.setAdapter(_stockPurchaseAdapter);
+            ItemTouchHelper.Callback callback = new SwipeCallback(_stockPurchaseAdapter);
             ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-            touchHelper.attachToRecyclerView(mRecyclerView);
+            touchHelper.attachToRecyclerView(_recyclerView);
         } else {
-            mStockPurchaseAdapter.setStockPurchases(stockPurchaseHistory);
-            mStockPurchaseAdapter.notifyDataSetChanged();
+            _stockPurchaseAdapter.setStockPurchases(stockPurchaseHistory);
+            _stockPurchaseAdapter.notifyDataSetChanged();
         }
     }
 
@@ -143,8 +151,8 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
 
     @Override
     public void onDateSelectedCallBack(Date date) {
-        mStockPurchaseDate = date;
-        mStockPurchaseDateButton.setText(DateFormat.format("EEEE, MMM dd, yyyy", date).toString());
+        _stockPurchaseDate = date;
+        _stockPurchaseDateButton.setText(DateFormat.format("EEEE, MMM dd, yyyy", date).toString());
     }
 
     private class StockPurchaseHolder extends RecyclerView.ViewHolder  {
@@ -213,9 +221,10 @@ public class StockPurchaseActivity extends AppCompatActivity implements Navigati
                         public void onClick(View v) {
                             StockLab.get(getParent()).addStockPurchase(stock);
                             Add(stock);
+                            updateUI();
                         }
-                    })
-                    .show();
+                    }).show();
+            updateUI();
         }
 
         private void Add(StockPurchase stockPurchase){

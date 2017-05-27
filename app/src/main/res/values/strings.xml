@@ -4,7 +4,7 @@
     <string name="title_activity_stock">StockActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_stock_purchase">StockPurchaseActivity</string>
+    <string name="title_activity_stock_purchase">Stock Purchase</string>
     <string name="symbol">Symbol</string>
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
@@ -42,4 +42,5 @@
     <string name="percentage_dividend_yield">Percentage dividend yield</string>
     <string name="percentage_fi">Percentage FI</string>
     <string name="cantFindStock_format">Unable to find \'%s\' current price</string>
+    <string name="investmentSum_format">£%,.2f invested</string>
 </resources>
