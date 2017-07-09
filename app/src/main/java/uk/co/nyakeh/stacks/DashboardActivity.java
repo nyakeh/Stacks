@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,6 +37,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private TextView mPortfolio;
     private TextView mPercentageFI;
     private TextView mDaysSinceInvestment;
+    private List<StockPurchase> _stockPurchaseHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,18 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         mPortfolio = (TextView) findViewById(R.id.dashboard_portfolio);
         mPercentageFI = (TextView) findViewById(R.id.dashboard_percentageFI);
         mDaysSinceInvestment = (TextView) findViewById(R.id.dashboard_daysSinceInvestment);
-        new GoogleFinanceClient(this, this).execute("VMID,VANG_FTSE_GLB_3GLTQB");
+
+
+        _stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory();
+        List purchasedStocks = new ArrayList();
+        for (StockPurchase stockPurchase : _stockPurchaseHistory) {
+            if (!purchasedStocks.contains(stockPurchase.Symbol))
+            {
+                purchasedStocks.add(stockPurchase.Symbol);
+            }
+        }
+        String asd = TextUtils.join(",", purchasedStocks);
+        new GoogleFinanceClient(this, this).execute(asd);
     }
 
     public void PostExecute(String response) {
@@ -74,8 +88,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         Calendar cal = Calendar.getInstance();
         cal.set(1900, 01, 01);
         Date latestInvestment = cal.getTime();
-        List<StockPurchase> stockPurchaseHistory = StockLab.get(this).getStockPurchaseHistory();
-        for (StockPurchase stockPurchase : stockPurchaseHistory) {
+        for (StockPurchase stockPurchase : _stockPurchaseHistory) {
             purchaseSum += stockPurchase.Total;
             if (sharePrices.containsKey(stockPurchase.Symbol)) {
                 portfolioSum += sharePrices.get(stockPurchase.Symbol) * stockPurchase.Quantity;
