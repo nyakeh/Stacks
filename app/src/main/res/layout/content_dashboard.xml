@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:paddingTop="@dimen/auxiliary_margin"
             android:textColor="@color/cardview_light_background"
             android:textSize="40sp"
             android:textStyle="bold"
